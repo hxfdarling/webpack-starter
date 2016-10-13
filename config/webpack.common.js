@@ -24,8 +24,11 @@ module.exports = {
       }, {
         test: /\.html$/,
         loader: 'html'
-      }, {
-        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+      },
+      //图片文件使用 url-loader 来处理，小于8kb的直接转为base64
+      { test: /\.(png|jpe?g)$/, loader: 'url-loader?limit=8192' },
+      {
+        test: /\.(gif|svg|woff|woff2|ttf|eot|ico)$/,
         loader: 'file?name=assets/[name].[hash].[ext]'
       }, {
         test: /\.css$/,
