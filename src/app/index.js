@@ -5,3 +5,4 @@ document.body.innerHTML = `
     <div class="${style.root}">Hello word</div>
 `;
 console.log(process.env.ENV);
+console.log('start');
