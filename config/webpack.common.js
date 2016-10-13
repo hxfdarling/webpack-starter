@@ -21,47 +21,47 @@ module.exports = {
     module: {
         loaders: [
 
-            {
-                loader: 'babel',
-                tset: /\.js$/,
-                exclude: [/node_modules|dist|\.history/]
-            },
-            {
-                test: /\.json$/,
-                loader: 'json'
-            },
-            {
-                test: /\.html$/,
-                loader: 'html'
-            },
+            { loader: 'babel', tset: /\.js$/, exclude: [/node_modules|dist|\.history/] },
+            { test: /\.json$/, loader: 'json' },
+            { test: /\.html$/, loader: 'html' },
 
             //图片文件使用 url-loader 来处理，小于8kb的直接转为base64
             {
                 test: /\.(png|jpe?g)$/,
                 loaders: [
-                    'file?name=assets/[name].[hash][ext]'
-                    // 'url-loader?limit=8192'
+                    // 'file?name=assets/[name].[hash][ext]'
+                    'url-loader?limit=8192'
                     //  'image-webpack'
                 ]
             },
             {
                 test: /\.(gif|svg|woff|woff2|ttf|eot|ico)$/,
                 loader: 'file?name=assets/[name].[hash].[ext]'
-            }, {
+            },
+            {
                 test: /\.css$/,
-                exclude: helpers.root('src', 'app'),
-                loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
-            }, {
-                test: /\.css$/,
-                include: helpers.root('src', 'app'),
-                loader: 'raw'
+                //用于分离css与js代码，默认使用moules后会将css代码打包到js中
+                loader: ExtractTextPlugin.extract('style', 'css?modules!postcss')
             }
+            // {
+            //     test: /\.css$/,
+            //     exclude: helpers.root('src', 'app'),
+            //     loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
+            // }, {
+            //     test: /\.css$/,
+            //     include: helpers.root('src', 'app'),
+            //     loader: 'raw'
+            // }
         ]
     },
     babel: {
         presets: ['es2015'],
         plugins: ['transform-runtime']
     },
+    postcss: [
+        //配置css样式自动更具can i use添加前缀
+        require('autoprefixer')
+    ],
     imageWebpackLoader: {
         pngquant: {
             quality: "65-90",
@@ -78,6 +78,16 @@ module.exports = {
         }
     },
     plugins: [
+        //根据该配置自动引入web_modules下面的第三方库，省去了手动写require('xxx')
+        new webpack.ProvidePlugin({
+            'Vue': 'vue',
+            "$": "jquery",
+            "jQuery": "jquery",
+            "window.jQuery": "jquery"
+        }),
+        //在文件头上添加版权信息
+        new webpack.BannerPlugin("Copyright by zman inc."),
+        //写一个文件目录表
         new AssetsPlugin({
             path: helpers.root('dist'),
             filename: 'webpack-assets.json',
@@ -86,6 +96,7 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
             name: ['polyfills', 'vendor'].reverse()
         }),
+        //替换html文件里面的变量
         new HtmlWebpackPlugin({
             template: 'src/index.html'
         })

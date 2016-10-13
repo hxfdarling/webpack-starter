@@ -1,0 +1,10 @@
+.root {
+    background: #ddd;
+    color: #333;
+    font-size: 24px;
+}
+
+.button {
+    color: #999;
+    background: url("../assests/img/right.png");
+}

@@ -5,8 +5,9 @@
   "scripts": {
     "start": "webpack-dev-server --inline --progress --port 80",
     "test": "karma start",
-    "dev": "rimraf dist && webpack --config config/webpack.dev.js --progress --profile --bail",
-    "prod": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail"
+    "build": "rimraf dist && webpack --config config/webpack.dev.js --progress --profile --bail",
+    "build:dev": "npm run build",
+    "build:prod": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail"
   },
   "license": "MIT",
   "dependencies": {
@@ -16,13 +17,14 @@
     "zone.js": "^0.6.23"
   },
   "devDependencies": {
-    "copy-webpack-plugin": "^3.0.1",
     "assets-webpack-plugin": "^3.4.0",
+    "autoprefixer": "^6.5.1",
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
     "babel-plugin-transform-runtime": "^6.0.0",
     "babel-preset-es2015": "^6.0.0",
     "babel-runtime": "^6.0.0",
+    "copy-webpack-plugin": "^3.0.1",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
@@ -38,6 +40,7 @@
     "karma-webpack": "^1.8.0",
     "null-loader": "^0.1.1",
     "phantomjs-prebuilt": "^2.1.7",
+    "postcss-loader": "^0.13.0",
     "raw-loader": "^0.5.1",
     "rimraf": "^2.5.2",
     "style-loader": "^0.13.1",
