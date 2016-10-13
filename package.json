@@ -1,6 +1,6 @@
 {
   "name": "webpack-starter",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A webpack starter for js",
   "scripts": {
     "start": "webpack-dev-server --inline --progress --port 80",
