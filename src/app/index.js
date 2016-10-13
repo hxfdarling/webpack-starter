@@ -1,7 +1,6 @@
 import '../assests/css/base.css';
 import style from './index.css';
 import { data } from './data.json';
-import Vue from 'vue';
 document.body.innerHTML = `<div class="app" id="app"></div>`;
 window.Vue = Vue;
 // 定义
