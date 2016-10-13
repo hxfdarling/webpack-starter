@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A webpack starter for js",
   "scripts": {
-    "start": "webpack-dev-server --inline --progress --port 8080",
+    "start": "webpack-dev-server --inline --progress --port 80",
     "test": "karma start",
     "dev": "rimraf dist && webpack --config config/webpack.dev.js --progress --profile --bail",
     "prod": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail"
@@ -16,32 +16,32 @@
     "zone.js": "^0.6.23"
   },
   "devDependencies": {
-    "json-loader":"^0.5.4",
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
     "babel-plugin-transform-runtime": "^6.0.0",
     "babel-preset-es2015": "^6.0.0",
     "babel-runtime": "^6.0.0",
-    "awesome-typescript-loader": "^2.2.4",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "html-loader": "^0.4.3",
     "html-webpack-plugin": "^2.15.0",
+    "image-webpack-loader": "^2.0.0",
     "jasmine-core": "^2.4.1",
+    "json-loader": "^0.5.4",
     "karma": "^1.2.0",
     "karma-jasmine": "^1.0.2",
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.8.0",
-    "phantomjs-prebuilt": "^2.1.7",
     "null-loader": "^0.1.1",
+    "phantomjs-prebuilt": "^2.1.7",
     "raw-loader": "^0.5.1",
     "rimraf": "^2.5.2",
     "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
     "webpack": "^1.13.0",
     "webpack-dev-server": "^1.14.1",
-    "webpack-merge": "^0.14.0",
-    "url-loader": "^0.5.7"
+    "webpack-merge": "^0.14.0"
   }
 }
