@@ -3,13 +3,13 @@ var webpackMerge = require('webpack-merge');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var commonConfig = require('./webpack.common.js');
 var helpers = require('./helpers');
-const ENV = process.env.BUILD_DEV = process.env.ENV = 'dev';
+const ENV = process.env.BUILD_DEV = process.env.NODE_ENV = process.env.ENV = 'dev';
 module.exports = webpackMerge(commonConfig, {
     devtool: "eval-source-map", //'cheap-module-eval-source-map',
 
     output: {
         path: helpers.root('dist'),
-        publicPath: 'http://localhost:80/',
+        publicPath: '',
         filename: '[name].js',
         chunkFilename: '[id].chunk.js'
     },

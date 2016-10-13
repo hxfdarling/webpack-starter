@@ -16,6 +16,10 @@ module.exports = {
         extensions: ['', '.js', 'json'],
         // An array of directory names to be resolved to the current directory
         modules: [helpers.root('src'), 'node_modules'],
+        alias: {
+            //开启vue的standalone
+            vue: 'vue/dist/vue.js'
+        }
     },
 
     module: {
