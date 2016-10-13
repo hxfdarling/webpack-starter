@@ -2,13 +2,13 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var helpers = require('./helpers');
-
+var AssetsPlugin = require('assets-webpack-plugin');
 module.exports = {
     entry: {
-        //填充库
-        // 'polyfills': './src/polyfills.js',
-        //框架库，例如vue，jquery
-        // 'vendor': './src/vendor.js',
+        //polyfill es5,es6......
+        'polyfills': './src/polyfills.js',
+        //example:vuejs,jquery
+        'vendor': './src/vendor.js',
         'app': './src/main.js'
     },
 
@@ -39,7 +39,7 @@ module.exports = {
             {
                 test: /\.(png|jpe?g)$/,
                 loaders: [
-                    'file?name=assets/[name].[hash].[ext]'
+                    'file?name=assets/[name].[hash][ext]'
                     // 'url-loader?limit=8192'
                     //  'image-webpack'
                 ]
@@ -78,11 +78,14 @@ module.exports = {
         }
     },
     plugins: [
-        //如果有扩展库需要对处理
-        // new webpack.optimize.CommonsChunkPlugin({
-        //     name: ['app', 'vendor', 'polyfills']
-        // }),
-
+        new AssetsPlugin({
+            path: helpers.root('dist'),
+            filename: 'webpack-assets.json',
+            prettyPrint: true
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: ['polyfills', 'vendor'].reverse()
+        }),
         new HtmlWebpackPlugin({
             template: 'src/index.html'
         })

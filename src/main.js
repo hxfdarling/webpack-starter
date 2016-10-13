@@ -1,2 +1,1 @@
-import start from './app/app.js';
-start();
+import start from './app/index.js';
