@@ -91,7 +91,7 @@ module.exports = {
             "window.jQuery": "jquery"
         }),
         new CopyWebpackPlugin([{
-            from: helpers.root('src') + '/assests/icon/favicon.ico',
+            from: helpers.root('src') + '/public',
             to:helpers.root('dist')
         }]),
         //在文件头上添加版权信息

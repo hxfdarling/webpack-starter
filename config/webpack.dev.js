@@ -24,6 +24,7 @@ module.exports = webpackMerge(commonConfig, {
     ],
 
     devServer: {
+        contentBase:'./src/public',
         historyApiFallback: true,
         stats: 'minimal'
     }
