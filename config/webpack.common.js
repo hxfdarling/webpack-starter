@@ -3,6 +3,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var helpers = require('./helpers');
 var AssetsPlugin = require('assets-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
     entry: {
         //polyfill es5,es6......
@@ -89,6 +90,10 @@ module.exports = {
             "jQuery": "jquery",
             "window.jQuery": "jquery"
         }),
+        new CopyWebpackPlugin([{
+            from: helpers.root('src') + '/assests/icon/favicon.ico',
+            to:helpers.root('dist')
+        }]),
         //在文件头上添加版权信息
         new webpack.BannerPlugin("Copyright by zman inc."),
         //写一个文件目录表
@@ -102,6 +107,7 @@ module.exports = {
         }),
         //替换html文件里面的变量
         new HtmlWebpackPlugin({
+            filename: "index.html",
             template: 'src/index.html'
         })
     ]

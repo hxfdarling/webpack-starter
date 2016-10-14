@@ -1,10 +1,15 @@
 .root {
-    background: #ddd;
     color: #333;
     font-size: 24px;
+    text-align: center;
+    margin:0 auto;
 }
 
-.button {
+.ok {
+    margin:0 auto;
     color: #999;
-    background: url("../assests/img/right.png");
+    height: 88px;
+    width: 88px;
+    background: url("../assests/img/right.png") no-repeat;
+    background-size: 100%;
 }

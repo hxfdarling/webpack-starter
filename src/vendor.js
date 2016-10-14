@@ -1,2 +1,3 @@
 //vuejs....
 import 'vue';
+import 'jquery';
