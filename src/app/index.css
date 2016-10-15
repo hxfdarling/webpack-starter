@@ -1,12 +1,29 @@
-.root {
-    color: #333;
-    font-size: 24px;
-    text-align: center;
-    margin:0 auto;
+.app {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.x-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 200px;
+}
+
+.x-main {
+    position: absolute;
+    top: 0;
+    left: 200px;
+    right: 0;
+    bottom: 0;
 }
 
 .ok {
-    margin:0 auto;
+    margin: 0 auto;
     color: #999;
     height: 88px;
     width: 88px;

@@ -1,59 +1,44 @@
 import '../assests/css/base.css';
 import style from './index.css';
 import { data } from './data.json';
-import html from './index.html';
-document.body.innerHTML = html;
-window.Vue = Vue;
-// 定义
-var MyComponent = Vue.extend({
-    created: function() {
-        // `this` 指向 vm 实例
-        console.log('created', this);
-    },
-    beforeCompile: function() {
-        console.log('this);')
-    },
-    compiled: function() {
-        console.log('test');
-    },
-    ready: function() {
-        console.log('ready');
-    },
-    beforeDestroy: function() {
+import { routes } from "./router.config.js";
+if (process.env.ENV === 'dev') {
+    window.Vue = Vue;
+    window.VueRouter = VueRouter;
+}
+Vue.config.debug = true;
 
-    },
-    destroyed: function() {
-
-    },
+const router = new VueRouter({
+    routes
+});
+router.beforeEach(function(to, from, next) {
+    console.log(from);
+    next();
+});
+let app = new Vue({
+    router,
     data: function() {
         return {
-            items: [
-                '1', '2', '3', '4', '5', '6'
-            ]
+            transitionName:"fade",
+            routes
+        };
+    },
+    watch: {
+        '$route' (to, from) {
+            const toDepth = to.path.split('/').length;
+            const fromDepth = from.path.split('/').length;
+             
         }
     },
     template: `
-    <div class="${style.root}">A global component!
-        <div v-for='item in items' class="${style.ok}" >{{item}}</div>
-    </div>   
+		<div>
+            <h1>Hello App!</h1>
+            <ul>
+                <li v-for="item in routes" v-if="item.text"><router-link :to="item.path">{{item.text}}</router-link></li>
+            </ul>
+           <transition :name="transitionName">
+            <router-view></router-view>
+            </transition>
+        </div>
     `
-});
-// 注册
-Vue.component('g-component', MyComponent);
-var nav = Vue.extend({
-    template: `<div class="${style.root}">{{message}}</div>`,
-    data: function() {
-        return {
-            message: 'hellow word'
-        };
-    }
-});
-
-new Vue({
-    el: "#app",
-    template: `<div><g-component></g-component><c-component></c-component></div>`,
-    components: {
-        // <my-component> 只能用在父组件模板内
-        'c-component': nav
-    }
-});
+}).$mount('#app');

@@ -85,15 +85,20 @@ module.exports = {
     plugins: [
         //根据该配置自动引入web_modules下面的第三方库，省去了手动写require('xxx')
         new webpack.ProvidePlugin({
-            'Vue': 'vue',
+            "Vue": "vue",
+            "VueRouter": "vue-router",
             "$": "jquery",
             "jQuery": "jquery",
             "window.jQuery": "jquery"
         }),
         new CopyWebpackPlugin([{
             from: helpers.root('src') + '/public',
-            to:helpers.root('dist')
+            to: helpers.root('dist')
         }]),
+        // new CopyWebpackPlugin([{
+        //     from: helpers.root('src') + '/public',
+        //     to:helpers.root('dist')
+        // }]),
         //在文件头上添加版权信息
         new webpack.BannerPlugin("Copyright by zman inc."),
         //写一个文件目录表
