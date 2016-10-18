@@ -1,4 +1,5 @@
 import style from './app.css';
+import data from '../components/data.js';
 export default Vue.extend({
     created: function() {
         // `this` 指向 vm 实例

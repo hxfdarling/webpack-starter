@@ -1,12 +1,10 @@
-export default Vue.extend({
+import data from '../components/data.js';
+console.log(data);
+export default  {
     template: `
  
-    <div style="background:#ddd;">{{message}}</div>
+    <div style="background:#ddd;">hello:{{message}}</div>
 
     `,
-    data: function() {
-        return {
-            message: 'hellow word'
-        };
-    }
-});
+    data:data.data
+};

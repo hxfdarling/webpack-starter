@@ -1,7 +1,10 @@
+//导入公共模块
+import "./common.js";
+
 import '../assests/css/base.css';
 import style from './index.css';
-import { data } from './data.json';
 import { routes } from "./router.config.js";
+
 if (process.env.ENV === 'dev') {
     window.Vue = Vue;
     window.VueRouter = VueRouter;
@@ -12,7 +15,6 @@ const router = new VueRouter({
     routes
 });
 router.beforeEach(function(to, from, next) {
-    console.log(from);
     next();
 });
 let app = new Vue({

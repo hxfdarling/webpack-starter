@@ -1,20 +1,24 @@
-import index from './pages/app.js';
-import hello from "./pages/hello.js";
-export const routes = [
-    {
-        path:'/',
-        redirect:'/index'
+import * as componentes from "./routes.js";
+export const routes = [{
+        "path": "/",
+        "redirect": "/index"
     },
     {
-        path: '/index',
-        name:"index",
-        text:"index page",
-        component: index
+        "path": "/index",
+        "name": "index",
+        "text": "index page",
+        "component": componentes.index
     },
     {
-        path: '/hello',
-        name:"hello",
-        text:'hello page',
-        component: hello
+        "path": "/hello",
+        "name": "hello",
+        "text": "hello page",
+        "component": componentes.hello
+    },
+    {
+        "path": "/list",
+        "name": "list",
+        "text": "list page",
+        "component": componentes.list
     }
-]
+];
