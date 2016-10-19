@@ -46,13 +46,16 @@ module.exports = {
             {
                 test: /\.css$/,
                 //用于分离css与js代码，默认使用moules后会将css代码打包到js中
-                loader: ExtractTextPlugin.extract('style', 'css?modules!postcss')
+                //[hash:base64:5]_[path][name]_[local]
+                exclude: helpers.root('src', 'assests'),
+                loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[hash:base64:5]_[path][name]_[local]!postcss')
+            },
+            {
+                test: /\.css$/,
+                include: helpers.root('src', 'assests'),
+                loader: ExtractTextPlugin.extract('style', 'css!postcss')
             }
-            // {
-            //     test: /\.css$/,
-            //     exclude: helpers.root('src', 'app'),
-            //     loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
-            // }, {
+            //, {
             //     test: /\.css$/,
             //     include: helpers.root('src', 'app'),
             //     loader: 'raw'
@@ -95,10 +98,6 @@ module.exports = {
             from: helpers.root('src') + '/public',
             to: helpers.root('dist')
         }]),
-        // new CopyWebpackPlugin([{
-        //     from: helpers.root('src') + '/public',
-        //     to:helpers.root('dist')
-        // }]),
         //在文件头上添加版权信息
         new webpack.BannerPlugin("Copyright by zman inc."),
         //写一个文件目录表
@@ -108,7 +107,7 @@ module.exports = {
             prettyPrint: true
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            name: ['polyfills', 'vendor'].reverse()
+            name: ['vendor', 'polyfills']
         }),
         //替换html文件里面的变量
         new HtmlWebpackPlugin({

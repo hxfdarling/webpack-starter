@@ -22,11 +22,13 @@ export default Vue.extend({
     },
     template: `
   
-        <div class="${style['x-main']}" >
-            <div v-if="show">
-                <div v-for='item in items' class="test" >{{item.text}}</div>
-            </div>
-            <button v-on:click="toggleShow">show or hidden</button>
+        <div  >
+            <transition name="fade">
+                <div v-if="show">
+                    <div v-for='item in items' class="${style.test}" >{{item.text}}</div>
+                </div>
+            </transition>
+            <button v-on:click="show=!show">show or hidden</button>
         </div>   
 
     `

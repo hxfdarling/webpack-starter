@@ -1,9 +1,9 @@
 import data from '../components/data.js';
-console.log(data);
+import style from './hello.css';
 export default  {
     template: `
  
-    <div style="background:#ddd;">hello:{{message}}</div>
+    <div style="${style.text}">hello:{{message}}</div>
 
     `,
     data:data.data

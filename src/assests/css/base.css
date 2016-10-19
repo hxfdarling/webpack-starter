@@ -8,4 +8,11 @@
 	list-style: none;
 	font-family: "微软雅黑";
 	font-style: normal;
+	font-size:14px;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0
 }

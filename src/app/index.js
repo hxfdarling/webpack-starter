@@ -1,15 +1,13 @@
-//导入公共模块
 import "./common.js";
-
-import '../assests/css/base.css';
 import style from './index.css';
 import { routes } from "./router.config.js";
 
 if (process.env.ENV === 'dev') {
     window.Vue = Vue;
     window.VueRouter = VueRouter;
+    Vue.config.debug = true;
 }
-Vue.config.debug = true;
+
 
 const router = new VueRouter({
     routes
@@ -34,13 +32,17 @@ let app = new Vue({
     },
     template: `
 		<div>
-            <h1>Hello App!</h1>
-            <ul>
-                <li v-for="item in routes" v-if="item.text"><router-link :to="item.path">{{item.text}}</router-link></li>
-            </ul>
-           <transition :name="transitionName">
-            <router-view></router-view>
-            </transition>
+            <div class="${style['x-menu']}">
+                <h1>Hello App!</h1>
+                <ul>
+                    <li v-for="item in routes" v-if="item.text"><router-link :to="item.path">{{item.text}}</router-link></li>
+                </ul>
+            </div>
+            <div class="${style['x-main']}">
+                <transition :name="transitionName">
+                    <router-view></router-view>
+                </transition>
+            </div>
         </div>
     `
 }).$mount('#app');

@@ -1,11 +1,11 @@
 .app {
+    color:#333;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
 }
-
 .x-menu {
     position: absolute;
     top: 0;
@@ -21,12 +21,6 @@
     right: 0;
     bottom: 0;
 }
-
-.ok {
-    margin: 0 auto;
-    color: #999;
-    height: 88px;
-    width: 88px;
-    background: url("../assests/img/right.png") no-repeat;
-    background-size: 100%;
+.x-main >div{
+    position:absolute;
 }
