@@ -5,7 +5,7 @@
   "scripts": {
     "start": "webpack-dev-server --inline --progress --port 80",
     "test": "karma start",
-    "build": "rimraf dist && webpack --config config/webpack.dev.js --progress --profile --bail",
+    "build": "rimraf dist && webpack --config config/webpack.dev.js --watch --progress --profile --bail",
     "build:dev": "npm run build",
     "build:prod": "rimraf dist && webpack --config config/webpack.prod.js -p --progress --profile --bail"
   },

@@ -15,6 +15,9 @@ module.exports = {
 		'app': './src/main.js'
 	},
 
+	externals: {
+
+	},
 	resolve: {
 		extensions: ['', '.js', 'json'],
 		// An array of directory names to be resolved to the current directory
@@ -22,11 +25,16 @@ module.exports = {
 		alias: {
 			//开启vue的standalone
 			vue: 'vue/dist/vue.js',
-			test: "./src/test.js"
 		}
 	},
 
 	module: {
+		/*
+		正规表达式或正则表达式的数组。不解析文件匹配。
+		它针对全解析的请求相匹配。
+		无视大库时，这可以提高性能。
+		*/
+		noParse: [],
 		loaders: [
 
 			{
