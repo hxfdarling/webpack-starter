@@ -1,4 +1,4 @@
-import "./common.js";
+import "../test.js";
 import style from './index.css';
 import { routes } from "./router.config.js";
 
