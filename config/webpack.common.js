@@ -9,7 +9,7 @@ var path = require('path');
 module.exports = {
 	entry: {
 		//polyfill es5,es6......
-		'polyfills': './src/polyfills.js',
+		// 'polyfills': './src/polyfills.js',
 		//example:vuejs,jquery
 		'vendor': './src/vendor.js',
 		'app': './src/main.js'
@@ -35,9 +35,7 @@ module.exports = {
 		无视大库时，这可以提高性能。
 		*/
 		noParse: [],
-		loaders: [
-
-			{
+		loaders: [{
 				loader: 'babel',
 				tset: /\.js$/,
 				exclude: [
@@ -66,7 +64,8 @@ module.exports = {
 				//用于分离css与js代码，默认使用moules后会将css代码打包到js中
 				//[hash:base64:5]_[path][name]_[local]
 				exclude: helpers.root('src', 'assests'),
-				loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[hash:base64:5]_[path][name]_[local]!postcss')
+				loader: ExtractTextPlugin.extract('style', 'css!postcss')
+					// loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[hash:base64:5]_[path][name]_[local]!postcss')
 			},
 			{
 				test: /\.css$/,
@@ -126,7 +125,7 @@ module.exports = {
 			prettyPrint: true
 		}),
 		new webpack.optimize.CommonsChunkPlugin({
-			name: ['vendor', 'polyfills', 'load']
+			name: ['vendor', 'load']
 		}),
 		//替换html文件里面的变量
 		new HtmlWebpackPlugin({
