@@ -1,7 +1,19 @@
 import data from '../components/data.js';
-export default{
-    template:`
-    <div>list:<span>{{message}}</span></div>
+import './list.css';
+export default {
+	template: `
+	<ul>
+		<li v-for="item in list">
+			<div class="item">list:<span>{{item}}</span></div>
+		</li>
+	</ul>
     `,
-    data:data.data
+	data: function() {
+		return {
+			data,
+			list: [
+				'1.test', '2.go'
+			]
+		}
+	}
 }

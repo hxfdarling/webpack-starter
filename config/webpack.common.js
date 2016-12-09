@@ -50,9 +50,9 @@ module.exports = {
 			{
 				test: /\.(png|jpe?g)$/,
 				loaders: [
-					// 'file?name=assets/[name].[hash][ext]'
-					'url-loader?limit=8192'
-					//  'image-webpack'
+					'file?name=assets/[name].[hash].[ext]',
+					// 'url-loader?limit=8192',
+					 'image-webpack'
 				]
 			},
 			{
