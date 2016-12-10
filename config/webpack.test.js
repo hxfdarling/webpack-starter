@@ -1,6 +1,8 @@
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var helpers = require('./helpers');
+var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 	cache: true,
@@ -63,5 +65,21 @@ module.exports = {
 	babel: {
 		presets: ['es2015'],
 		plugins: ['transform-runtime', 'add-module-exports']
-	}
+	},
+	postcss: [
+		//配置css样式自动更具can i use添加前缀
+		require('autoprefixer')
+	],
+	plugins: [
+		new webpack.ProvidePlugin({
+			"Vue": "vue",
+			"VueRouter": "vue-router",
+			"$": "jquery",
+			"jQuery": "jquery"
+		}),
+		new HtmlWebpackPlugin({
+			filename: "index.html",
+			template: 'src/index.html'
+		})
+	]
 }
