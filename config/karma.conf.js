@@ -3,15 +3,15 @@ var webpackConfig = require('./webpack.test');
 module.exports = function(config) {
 	var _config = {
 		basePath: '',
-		browsers: ['PhantomJS'], //Chrome
+		browsers: ['Chrome'], //Chrome,PhantomJS
 		coverageReporter: {
-			reporters: [
-				{ type: 'html', subdir: 'html' },
-				{ type: 'lcovonly', subdir: '.' },
-			],
-		},
-		coverageReporter: {
-			type: 'in-memory'
+			reporters: [{
+				type: 'html',
+				subdir: 'html'
+			}, {
+				type: 'lcovonly',
+				subdir: '.'
+			}, ],
 		},
 		frameworks: ['jasmine'],
 
@@ -21,7 +21,7 @@ module.exports = function(config) {
 		}],
 
 		preprocessors: {
-			'./config/karma-test-shim.js': ['coverage','webpack', 'sourcemap']
+			'./config/karma-test-shim.js': ['coverage', 'webpack', 'sourcemap']
 		},
 
 		webpack: webpackConfig,
