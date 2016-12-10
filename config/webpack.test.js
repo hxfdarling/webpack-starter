@@ -1,16 +1,67 @@
-var helpers = require('./helpers');
-var webpack = require('webpack');
-var commonConfig = require('./webpack.common.js');
-var webpackMerge = require('webpack-merge');
+var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var commonsChunkPluginIndex = commonConfig.plugins.findIndex(plugin => plugin.chunkNames);
-if (~commonsChunkPluginIndex) {
-	commonConfig.plugins.splice(commonsChunkPluginIndex, 1);
-}
-module.exports = webpackMerge(commonConfig, {
-	devtool: 'inline-source-map',
+var helpers = require('./helpers');
+
+module.exports = {
 	cache: true,
-	plugins: [
-		new ExtractTextPlugin('[name].css')
-	]
-})
+	devtool: 'inline-source-map',
+	module: {
+		preLoaders: [{
+				test: /\.spec\.js$/,
+				include: /src/,
+				exclude: /(bower_components|node_modules)/,
+				loader: 'babel',
+				query: {
+					cacheDirectory: true,
+				}
+			},
+			{
+				test: /\.js?$/,
+				include: /src/,
+				exclude: /(node_modules|bower_components|\.spec\.js)/,
+				loader: 'babel-istanbul',
+				query: {
+					cacheDirectory: true,
+				}
+			}
+		],
+		loaders: [{
+				loader: 'babel',
+				tset: /\.js$/,
+				exclude: [
+					/node_modules/,
+					path.resolve(helpers.root('src'), './patch')
+				]
+			},
+			{ test: /\.json$/, loader: 'json' },
+			{ test: /\.html$/, loader: 'html' },
+
+			//图片文件使用 url-loader 来处理，小于8kb的直接转为base64
+			{
+				test: /\.(png|jpe?g)$/,
+				loaders: [
+					'file?name=assets/[name].[hash].[ext]',
+					// 'url-loader?limit=8192',
+					'image-webpack'
+				]
+			},
+			{
+				test: /\.(gif|svg|woff|woff2|ttf|eot|ico)$/,
+				loader: 'file?name=assets/[name].[hash].[ext]'
+			},
+			{
+				test: /\.css$/,
+				loader: 'style!css!postcss'
+			}
+			//, {
+			//     test: /\.css$/,
+			//     include: helpers.root('src', 'app'),
+			//     loader: 'raw'
+			// }
+		]
+	},
+	babel: {
+		presets: ['es2015'],
+		plugins: ['transform-runtime', 'add-module-exports']
+	}
+}

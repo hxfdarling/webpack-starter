@@ -6,9 +6,9 @@
 		"start": "webpack-dev-server --inline --progress",
 		"test": "karma start",
 		"clean": "rimraf dist build",
-		"build": "npm run clean && webpack --config config/webpack.dev.js --progress --profile --bail",
+		"build": "npm run clean && npm run test && webpack --config config/webpack.dev.js --progress --profile --bail",
 		"build:dev": "npm run build",
-		"build:prod": "npm run clean && webpack --config config/webpack.prod.js -p --progress --profile --bail"
+		"build:prod": "npm run clean && npm run test && webpack --config config/webpack.prod.js -p --progress --profile --bail"
 	},
 	"license": "MIT",
 	"dependencies": {
