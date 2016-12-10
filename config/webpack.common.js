@@ -52,7 +52,7 @@ module.exports = {
 				loaders: [
 					'file?name=assets/[name].[hash].[ext]',
 					// 'url-loader?limit=8192',
-					 'image-webpack'
+					'image-webpack'
 				]
 			},
 			{

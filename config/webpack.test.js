@@ -1,31 +1,16 @@
 var helpers = require('./helpers');
-
-module.exports = {
-  devtool: 'inline-source-map',
-
-  resolve: {
-    extensions: ['', '.ts', '.js']
-  },
-
-  module: {
-    loaders: [{
-      test: /\.ts$/,
-      loaders: ['awesome-typescript-loader', 'angular2-template-loader']
-    }, {
-      test: /\.html$/,
-      loader: 'html'
-
-    }, {
-      test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-      loader: 'null'
-    }, {
-      test: /\.css$/,
-      exclude: helpers.root('src', 'app'),
-      loader: 'null'
-    }, {
-      test: /\.css$/,
-      include: helpers.root('src', 'app'),
-      loader: 'raw'
-    }]
-  }
+var webpack = require('webpack');
+var commonConfig = require('./webpack.common.js');
+var webpackMerge = require('webpack-merge');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var commonsChunkPluginIndex = commonConfig.plugins.findIndex(plugin => plugin.chunkNames);
+if (~commonsChunkPluginIndex) {
+	commonConfig.plugins.splice(commonsChunkPluginIndex, 1);
 }
+module.exports = webpackMerge(commonConfig, {
+	devtool: 'inline-source-map',
+	cache: true,
+	plugins: [
+		new ExtractTextPlugin('[name].css')
+	]
+})
