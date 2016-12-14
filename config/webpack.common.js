@@ -9,7 +9,7 @@ var path = require('path');
 module.exports = {
 	entry: {
 		//polyfill es5,es6......
-		// 'polyfills': './src/polyfills.js',
+		'polyfills': './src/polyfills.js',
 		//example:vuejs,jquery
 		'vendor': './src/vendor.js',
 		'app': './src/main.js'
@@ -125,12 +125,13 @@ module.exports = {
 			prettyPrint: true
 		}),
 		new webpack.optimize.CommonsChunkPlugin({
-			name: ['vendor', 'load']
+			name: ['vendor','polyfills', 'load']
 		}),
 		//替换html文件里面的变量
 		new HtmlWebpackPlugin({
 			filename: "index.html",
-			template: 'src/index.html'
+			template: 'src/index.html',
+			chunksSortMode:"dependency"
 		})
 	]
 };
