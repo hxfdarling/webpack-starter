@@ -30,9 +30,11 @@ module.exports = webpackMerge(commonConfig, {
 		contentBase: './src/public',
 		historyApiFallback: true,
 		stats: 'minimal',
-		proxy:{
-			// "**":"http://localhost:8080"
-			//secret:false
+		proxy: {
+			"**": {
+				target: "http://localhost:8080",
+				secret: false
+			}
 		}
 	}
 });
