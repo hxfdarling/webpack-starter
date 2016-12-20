@@ -3,7 +3,7 @@ var webpackConfig = require('./webpack.test');
 module.exports = function(config) {
 	var _config = {
 		basePath: '',
-		browsers: ['Chrome'], //Chrome,PhantomJS
+		browsers: ['PhantomJS'], //Chrome,PhantomJS
 		coverageReporter: {
 			reporters: [{
 				type: 'html',

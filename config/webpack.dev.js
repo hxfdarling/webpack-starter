@@ -25,6 +25,7 @@ module.exports = webpackMerge(commonConfig, {
 
 	devServer: {
 		// hot: true,
+		host: '0.0.0.0',
 		port: 80,
 		compress: true,
 		contentBase: './src/public',
