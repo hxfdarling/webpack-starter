@@ -1,7 +1,7 @@
 {
   "name": "webpack-starter",
   "version": "0.0.1",
-  "description": "A webpack starter for js",
+  "description": "This repo help you to quickly build a webpack project",
   "scripts": {
     "start": "webpack-dev-server --inline --progress",
     "test": "karma start",
