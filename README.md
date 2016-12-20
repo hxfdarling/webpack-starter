@@ -1,5 +1,5 @@
 # webpack-starter
-
+This repo help you to quickly build a webpack project
 
 ## Quick start
 
