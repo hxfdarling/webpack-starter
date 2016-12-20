@@ -1,7 +1,7 @@
 # webpack-starter
 
 
-Quick start
+## Quick start
 
 Clone/Download the repo then edit index.js
 ```
