@@ -6,7 +6,7 @@ Quick start
     Clone/Download the repo then edit index.js
     # clone our repo
     # --depth 1 removes all but one .git commit history
-    git clone  https://github.com/webpack-starter.git
+    git clone  https://github.com/hxfdarling/webpack-starter.git
 
     # change directory to our repo
     cd webpack-starter
