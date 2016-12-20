@@ -3,22 +3,24 @@
 
 Quick start
 
-    Clone/Download the repo then edit index.js
-    # clone our repo
-    # --depth 1 removes all but one .git commit history
-    git clone  https://github.com/webpack-starter.git
+Clone/Download the repo then edit index.js
+```
+# clone our repo
+# --depth 1 removes all but one .git commit history
 
-    # change directory to our repo
-    cd webpack-starter
+git clone  https://github.com/hxfdarling/webpack-starter.git
 
-    # install the repo with npm
-    npm install
+# change directory to our repo
+cd webpack-starter
 
-    # start the server
-    npm start
+# install the repo with npm
+npm install
 
-    # bulid release
-    npm run bulid:prod
+# start the server
+npm start
 
+# bulid release
+npm run bulid:prod
+```
 
 go to http://0.0.0.0 or http://localhost in your browser
