@@ -13,10 +13,12 @@
   "license": "MIT",
   "dependencies": {
     "jquery": "^3.1.1",
-    "rxjs": "5.0.0-beta.12",
-    "vue": "^2.0.3",
-    "vue-router": "^2.0.1",
-    "zone.js": "^0.6.23"
+    "lodash": "^4.17.2",
+    "rxjs": "^5.0.0-beta.12",
+    "vue": "^2.1.6",
+    "vue-router": "^2.1.1",
+    "vuex": "^2.1.1",
+    "zone.js": "^0.6.26"
   },
   "devDependencies": {
     "assets-webpack-plugin": "^3.4.0",

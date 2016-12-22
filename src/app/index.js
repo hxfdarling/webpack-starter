@@ -2,27 +2,41 @@ import './index.css';
 import { routes } from "./router.config.js";
 
 if (process.env.ENV === 'dev') {
-	window.Vue = Vue;
-	window.VueRouter = VueRouter;
 	Vue.config.debug = true;
 }
-
+var store = new Vuex.Store({
+	state: {
+		count: 0
+	},
+	mutations: {
+		increment(state) {
+			state.count++;
+		}
+	}
+})
 var InputComponent = {
 	template: `
 	<label>
-	{{label}}:<input v-model="value" v-on:input="updateValue"/>
+	{{cLabel}}<input v-model="value" v-on:input="updateValue"/>
 	</label>
 	`,
 	data: function() {
 		return {
-			value:this.input
+			value: this.input
 		}
 	},
 	props: ['input', 'label'],
-	computed:{
-		normalizedInput:function(){
-			console.log(test)
-			return 'test';
+	computed: {
+		cLabel: function() {
+			return this.label + ":";
+		}
+	},
+	watch: {
+		input: function(cur) {
+			this.value = cur;
+		},
+		value: function(cur, pre) {
+			this.$store.commit('increment');
 		}
 	},
 	methods: {
@@ -39,6 +53,7 @@ router.beforeEach(function(to, from, next) {
 });
 let app = new Vue({
 	router,
+	store,
 	data: function() {
 		return {
 			cls: "test",
@@ -46,6 +61,11 @@ let app = new Vue({
 			transitionName: "fade",
 			routes
 		};
+	},
+	computed: {
+		count() {
+			return this.$store.state.count;
+		}
 	},
 	components: { "input-x": InputComponent },
 	methods: {
@@ -71,10 +91,9 @@ let app = new Vue({
 	template: `
 	<div>
 		<div class="x-menu">
-			<h1>Hello App!</h1>
+			{{count}}
 			<input-x v-on:input="inputXChange" v-bind:input="value" label="my input"></input-x>
 			<input v-model="value"/>
-			<span>{{value}}</span>
 			<ul>
 				<li v-for="item in routes" v-if="item.text"><router-link :to="item.path">{{item.text}}</router-link></li>
 			</ul>
