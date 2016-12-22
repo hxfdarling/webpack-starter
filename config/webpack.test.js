@@ -73,13 +73,10 @@ module.exports = {
 	plugins: [
 		new webpack.ProvidePlugin({
 			"Vue": "vue",
+			"Vuex":"vuex",
 			"VueRouter": "vue-router",
 			"$": "jquery",
 			"jQuery": "jquery"
-		}),
-		new HtmlWebpackPlugin({
-			filename: "index.html",
-			template: 'src/index.html'
 		})
 	]
 }

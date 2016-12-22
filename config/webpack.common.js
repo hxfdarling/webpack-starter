@@ -108,6 +108,7 @@ module.exports = {
 		//根据该配置自动引入web_modules下面的第三方库，省去了手动写require('xxx')
 		new webpack.ProvidePlugin({
 			"Vue": "vue",
+			"Vuex":"vuex",
 			"VueRouter": "vue-router",
 			"$": "jquery",
 			"jQuery": "jquery"
