@@ -15,10 +15,13 @@ module.exports = function(config) {
 		},
 		frameworks: ['jasmine'],
 
-		files: [{
-			pattern: './config/karma-test-shim.js',
-			watched: false
-		}],
+		files: [
+			'./node_modules/babel-polyfill/dist/polyfill.js',
+			{
+				pattern: './config/karma-test-shim.js',
+				watched: false
+			}
+		],
 
 		preprocessors: {
 			'./config/karma-test-shim.js': ['coverage', 'webpack', 'sourcemap']

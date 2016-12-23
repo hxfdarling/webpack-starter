@@ -1,6 +1,7 @@
 import './index.css';
 import { routes } from "./router.config.js";
-
+Vue.use(VueRouter);
+Vue.use(Vuex);
 if (process.env.ENV === 'dev') {
 	Vue.config.debug = true;
 }
