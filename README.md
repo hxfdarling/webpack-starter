@@ -23,4 +23,4 @@ npm start
 npm run bulid:prod
 ```
 
-go to http://0.0.0.0 or http://localhost in your browser
+go to  http://localhost in your browser
