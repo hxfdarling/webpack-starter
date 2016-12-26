@@ -3,8 +3,10 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var helpers = require('./helpers');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var commonConfig = require('./webpack.common.js')('test');
+var webpackMerge = require('webpack-merge');
 
-module.exports = {
+module.exports = webpackMerge(commonConfig, {
 	cache: true,
 	devtool: 'inline-source-map',
 	module: {
@@ -81,11 +83,6 @@ module.exports = {
 				test: /\.css$/,
 				loader: 'style!css!postcss'
 			}
-			//, {
-			//     test: /\.css$/,
-			//     include: helpers.root('src', 'app'),
-			//     loader: 'raw'
-			// }
 		]
 	},
 	babel: {
@@ -105,4 +102,4 @@ module.exports = {
 			"jQuery": "jquery"
 		})
 	]
-}
+});

@@ -6,7 +6,7 @@ var AssetsPlugin = require('assets-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var MoveToParentMergingPlugin = require('move-to-parent-merging-webpack-plugin');
 var path = require('path');
-module.exports = {
+var config = {
 	entry: {
 		//polyfill es5,es6......
 		'polyfills': './src/polyfills.js',
@@ -72,26 +72,8 @@ module.exports = {
 			{
 				test: /\.(gif|svg|woff|woff2|ttf|eot|ico)$/,
 				loader: 'file?name=assets/[name].[hash].[ext]'
-			},
-			{
-				test: /\.css$/,
-				//用于分离css与js代码，默认使用moules后会将css代码打包到js中
-				//[hash:base64:5]_[path][name]_[local]
-				exclude: helpers.root('src', 'assests'),
-				// loader: 'style!css!postcss' //support hot module replacement
-				loader: ExtractTextPlugin.extract('style', 'css!postcss') //no support hot module replacement
-					// loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[hash:base64:5]_[path][name]_[local]!postcss')
-			},
-			{
-				test: /\.css$/,
-				include: helpers.root('src', 'assests'),
-				loader: ExtractTextPlugin.extract('style', 'css!postcss')
 			}
-			//, {
-			//     test: /\.css$/,
-			//     include: helpers.root('src', 'app'),
-			//     loader: 'raw'
-			// }
+			//css loader lazy config
 		]
 	},
 	babel: {
@@ -151,3 +133,27 @@ module.exports = {
 		})
 	]
 };
+module.exports = function(options) {
+	if (options == "test") {
+		return {}
+	}
+	if (options == "dev") {
+		config.module.loaders.push({
+			test: /\.css$/,
+			//用于分离css与js代码，默认使用moules后会将css代码打包到js中
+			//[hash:base64:5]_[path][name]_[local]
+			//exclude: helpers.root('src', 'assests'),
+			loader: 'style!css!postcss' //support hot module replacement
+				//loader: ExtractTextPlugin.extract('style', 'css!postcss') //no support hot module replacement
+				// loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[hash:base64:5]_[path][name]_[local]!postcss')
+		})
+		return config
+	}
+	if (options == "producation") {
+		config.module.loaders.push({
+			test: /\.css$/,
+			loader: ExtractTextPlugin.extract('style', 'css!postcss') //no support hot module replacement
+		})
+		return config;
+	}
+}
