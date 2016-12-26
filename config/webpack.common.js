@@ -78,7 +78,8 @@ module.exports = {
 				//用于分离css与js代码，默认使用moules后会将css代码打包到js中
 				//[hash:base64:5]_[path][name]_[local]
 				exclude: helpers.root('src', 'assests'),
-				loader: ExtractTextPlugin.extract('style', 'css!postcss')
+				// loader: 'style!css!postcss' //support hot module replacement
+				loader: ExtractTextPlugin.extract('style', 'css!postcss') //no support hot module replacement
 					// loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[hash:base64:5]_[path][name]_[local]!postcss')
 			},
 			{

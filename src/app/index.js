@@ -1,4 +1,3 @@
-
 import './index.css'
 import Vue from 'vue'
 import VueRouter from "vue-router"
@@ -61,7 +60,7 @@ Vue.use({
 	install: function(vue) {
 		vue.options = vue.util.mergeOptions(vue.options, {
 			created: function() {
-				console.log(this);
+				console.log('component name is ', this.$options.name);
 			}
 		})
 	}

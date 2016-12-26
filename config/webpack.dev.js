@@ -20,11 +20,12 @@ module.exports = webpackMerge(commonConfig, {
 			'process.env': {
 				'ENV': JSON.stringify(ENV)
 			}
-		})
+		}),
+		new webpack.HotModuleReplacementPlugin()
 	],
 
 	devServer: {
-		// hot: true,
+		hot: true,
 		host: '0.0.0.0',
 		port: 80,
 		compress: true,
@@ -32,7 +33,7 @@ module.exports = webpackMerge(commonConfig, {
 		historyApiFallback: true,
 		stats: 'minimal',
 		proxy: {
-			"**": {
+			"/server/**": {
 				target: "http://localhost:8080",
 				secret: false
 			}
