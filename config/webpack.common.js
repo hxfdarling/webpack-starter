@@ -19,7 +19,7 @@ module.exports = {
 
 	},
 	resolve: {
-		extensions: ['', '.js', 'json'],
+		extensions: ['', '.js', '.json', '.vue'],
 		// An array of directory names to be resolved to the current directory
 		modules: [helpers.root('src'), 'node_modules'],
 		alias: {
@@ -36,8 +36,22 @@ module.exports = {
 		*/
 		noParse: [],
 		loaders: [{
+				test: /\.vue$/,
+				loader: 'vue',
+				options: {
+					loaders: {
+						// Since sass (weirdly) has SCSS as its default parse mode, we map
+						// the "scss" and "sass" values for the lang attribute to the right configs here.
+						// other preprocessors should work out of the box, no loader config like this nessessary.
+						'scss': 'vue-style!css!sass',
+						'sass': 'vue-style!css!sass?indentedSyntax'
+					}
+					// other vue options go here
+				}
+			},
+			{
 				loader: 'babel',
-				tset: /\.js$/,
+				test: /\.js$/,
 				exclude: [
 					/node_modules/,
 					path.resolve(helpers.root('src'), './patch')
@@ -108,7 +122,7 @@ module.exports = {
 		//根据该配置自动引入web_modules下面的第三方库，省去了手动写require('xxx')
 		new webpack.ProvidePlugin({
 			"Vue": "vue",
-			"Vuex":"vuex",
+			"Vuex": "vuex",
 			"VueRouter": "vue-router",
 			"$": "jquery",
 			"jQuery": "jquery"
@@ -126,13 +140,13 @@ module.exports = {
 			prettyPrint: true
 		}),
 		new webpack.optimize.CommonsChunkPlugin({
-			name: ['vendor','polyfills', 'load']
+			name: ['vendor', 'polyfills', 'load']
 		}),
 		//替换html文件里面的变量
 		new HtmlWebpackPlugin({
 			filename: "index.html",
 			template: 'src/index.html',
-			chunksSortMode:"dependency"
+			chunksSortMode: "dependency"
 		})
 	]
 };

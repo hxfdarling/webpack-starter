@@ -1,5 +1,10 @@
-import './index.css';
-import { routes } from "./router.config.js";
+
+import './index.css'
+import Vue from 'vue'
+import VueRouter from "vue-router"
+import Vuex from "vuex"
+import { routes } from "./router.config.js"
+import XButton from './components/x-button.vue'
 Vue.use(VueRouter);
 Vue.use(Vuex);
 if (process.env.ENV === 'dev') {
@@ -52,6 +57,15 @@ const router = new VueRouter({
 router.beforeEach(function(to, from, next) {
 	next();
 });
+Vue.use({
+	install: function(vue) {
+		vue.options = vue.util.mergeOptions(vue.options, {
+			created: function() {
+				console.log(this);
+			}
+		})
+	}
+})
 let app = new Vue({
 	router,
 	store,
@@ -68,7 +82,7 @@ let app = new Vue({
 			return this.$store.state.count;
 		}
 	},
-	components: { "input-x": InputComponent },
+	components: { "input-x": InputComponent, XButton },
 	methods: {
 		change: function(event) {
 			if (this.changeTime) {
@@ -92,6 +106,7 @@ let app = new Vue({
 	template: `
 	<div>
 		<div class="x-menu">
+		<x-button></x-button>		
 			{{count}}
 			<input-x v-on:input="inputXChange" v-bind:input="value" label="my input"></input-x>
 			<input v-model="value"/>
@@ -107,3 +122,4 @@ let app = new Vue({
 	</div>
     `
 }).$mount('#app');
+window.app = app;
