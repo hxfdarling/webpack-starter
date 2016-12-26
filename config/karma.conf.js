@@ -16,6 +16,7 @@ module.exports = function(config) {
 		frameworks: ['jasmine'],
 
 		files: [
+			//for vuex 
 			'./node_modules/babel-polyfill/dist/polyfill.js',
 			{
 				pattern: './config/karma-test-shim.js',

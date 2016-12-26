@@ -9,6 +9,19 @@ module.exports = {
 	devtool: 'inline-source-map',
 	module: {
 		preLoaders: [{
+				test: /\.vue$/,
+				loader: 'vue',
+				options: {
+					loaders: {
+						// Since sass (weirdly) has SCSS as its default parse mode, we map
+						// the "scss" and "sass" values for the lang attribute to the right configs here.
+						// other preprocessors should work out of the box, no loader config like this nessessary.
+						'scss': 'vue-style!css!sass',
+						'sass': 'vue-style!css!sass?indentedSyntax'
+					}
+					// other vue options go here
+				}
+			}, {
 				test: /\.spec\.js$/,
 				include: /src/,
 				exclude: /(bower_components|node_modules)/,
@@ -28,6 +41,19 @@ module.exports = {
 			}
 		],
 		loaders: [{
+				test: /\.vue$/,
+				loader: 'vue',
+				options: {
+					loaders: {
+						// Since sass (weirdly) has SCSS as its default parse mode, we map
+						// the "scss" and "sass" values for the lang attribute to the right configs here.
+						// other preprocessors should work out of the box, no loader config like this nessessary.
+						'scss': 'vue-style!css!sass',
+						'sass': 'vue-style!css!sass?indentedSyntax'
+					}
+					// other vue options go here
+				}
+			}, {
 				loader: 'babel',
 				tset: /\.js$/,
 				exclude: [
@@ -73,7 +99,7 @@ module.exports = {
 	plugins: [
 		new webpack.ProvidePlugin({
 			"Vue": "vue",
-			"Vuex":"vuex",
+			"Vuex": "vuex",
 			"VueRouter": "vue-router",
 			"$": "jquery",
 			"jQuery": "jquery"
