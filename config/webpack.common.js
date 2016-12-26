@@ -102,14 +102,7 @@ var config = {
 	plugins: [
 		// 自动抽离异步加载的脚本引用到的资源到公共模块，第一次加载出来,可以设置参数，几个相同模块才会处理
 		new MoveToParentMergingPlugin(),
-		//根据该配置自动引入web_modules下面的第三方库，省去了手动写require('xxx')
-		new webpack.ProvidePlugin({
-			"Vue": "vue",
-			"Vuex": "vuex",
-			"VueRouter": "vue-router",
-			"$": "jquery",
-			"jQuery": "jquery"
-		}),
+
 		new CopyWebpackPlugin([{
 			from: helpers.root('src') + '/public',
 			to: helpers.root('dist')
@@ -134,26 +127,40 @@ var config = {
 	]
 };
 module.exports = function(options) {
+
 	if (options == "test") {
-		return {}
+		config.plugins = [];
+		config.entry = {};
+		config.module.loaders.push({
+			test: /\.css$/,
+			loader: 'style!css!postcss' //support hot module replacement
+		});
 	}
 	if (options == "dev") {
 		config.module.loaders.push({
 			test: /\.css$/,
 			//用于分离css与js代码，默认使用moules后会将css代码打包到js中
 			//[hash:base64:5]_[path][name]_[local]
-			//exclude: helpers.root('src', 'assests'),
+			// exclude: helpers.root('src', 'assests'),
 			loader: 'style!css!postcss' //support hot module replacement
 				//loader: ExtractTextPlugin.extract('style', 'css!postcss') //no support hot module replacement
 				// loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[hash:base64:5]_[path][name]_[local]!postcss')
-		})
-		return config
+		});
 	}
 	if (options == "producation") {
 		config.module.loaders.push({
 			test: /\.css$/,
 			loader: ExtractTextPlugin.extract('style', 'css!postcss') //no support hot module replacement
-		})
-		return config;
+		});
 	}
+	//根据该配置自动引入web_modules下面的第三方库，省去了手动写require('xxx')
+	var ProvidePlugin = new webpack.ProvidePlugin({
+		"Vue": "vue",
+		"Vuex": "vuex",
+		"VueRouter": "vue-router",
+		"$": "jquery",
+		"jQuery": "jquery"
+	});
+	config.plugins.push(ProvidePlugin);
+	return config;
 }
