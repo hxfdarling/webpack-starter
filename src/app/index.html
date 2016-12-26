@@ -1,0 +1,18 @@
+<div>
+	<div class="x-menu">
+		<x-button></x-button>
+		{{count}}
+		<input-x v-on:input="inputXChange" v-bind:input="value" label="my input"></input-x>
+		<input v-model="value" />
+		<ul>
+			<li v-for="item in routes" v-if="item.text">
+				<router-link :to="item.path">{{item.text}}</router-link>
+			</li>
+		</ul>
+	</div>
+	<div class="x-main">
+		<transition enter-active-class="animated tada" leave-active-class="animated bounceOutRight">
+			<router-view class="content"></router-view>
+		</transition>
+	</div>
+</div>

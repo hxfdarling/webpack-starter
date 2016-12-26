@@ -4,6 +4,7 @@ import VueRouter from "vue-router"
 import Vuex from "vuex"
 import { routes } from "./router.config.js"
 import XButton from './components/x-button.vue'
+import html from './index.html'
 Vue.use(VueRouter);
 Vue.use(Vuex);
 if (process.env.ENV === 'dev') {
@@ -102,23 +103,6 @@ let app = new Vue({
 			const fromDepth = from.path.split('/').length;
 		}
 	},
-	template: `
-	<div>
-		<div class="x-menu">
-		<x-button></x-button>		
-			{{count}}
-			<input-x v-on:input="inputXChange" v-bind:input="value" label="my input"></input-x>
-			<input v-model="value"/>
-			<ul>
-				<li v-for="item in routes" v-if="item.text"><router-link :to="item.path">{{item.text}}</router-link></li>
-			</ul>
-		</div>
-		<div class="x-main">
-			<transition :name="transitionName">
-				<router-view></router-view>
-			</transition>
-		</div>
-	</div>
-    `
+	template: html
 }).$mount('#app');
 window.app = app;

@@ -1,26 +1,33 @@
 .app {
-    color:#333;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+	color: #333;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 }
+
 .x-menu {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 200px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 200px;
 }
 
 .x-main {
-    position: absolute;
-    top: 0;
-    left: 200px;
-    right: 0;
-    bottom: 0;
+	position: absolute;
+	top: 0;
+	left: 200px;
+	right: 0;
+	bottom: 0;
 }
-.x-main >div{
-    position:absolute;
+
+.x-main>div {
+	position: absolute;
+}
+
+.content {
+	position: absolute;
+	background: #fff;
 }
