@@ -6,7 +6,7 @@ import { routes } from "./router.config.js"
 import XButton from './components/x-button.vue'
 import html from './index.html'
 Vue.use(VueRouter);
-Vue.use(Vuex);
+Vue.use(Vuex); 
 if (process.env.ENV === 'dev') {
 	Vue.config.debug = true;
 }
@@ -26,7 +26,25 @@ var InputComponent = {
 	{{cLabel}}<input v-model="value" v-on:input="updateValue"/>
 	</label>
 	`,
-	data: function() {
+	beforeCreate(){
+
+	},
+	created(){
+
+	},
+	beforeUpdate(){
+
+	},
+	updated(){
+
+	},
+	beforeDestroy(){
+
+	},
+	destroyed(){
+
+	},
+	data() {
 		return {
 			value: this.input
 		}
@@ -51,6 +69,7 @@ var InputComponent = {
 		}
 	}
 };
+
 const router = new VueRouter({
 	routes
 });
@@ -71,6 +90,7 @@ let app = new Vue({
 	store,
 	data: function() {
 		return {
+			test:'test',
 			cls: "test",
 			value: "test",
 			transitionName: "fade",
@@ -85,6 +105,7 @@ let app = new Vue({
 	components: { "input-x": InputComponent, XButton },
 	methods: {
 		change: function(event) {
+			this.$data.test =1;
 			if (this.changeTime) {
 				clearTimeout(this.changeTime);
 			}
@@ -105,4 +126,5 @@ let app = new Vue({
 	},
 	template: html
 }).$mount('#app');
+app.test = 2;
 window.app = app;

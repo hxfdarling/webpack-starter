@@ -11,6 +11,19 @@
 	font-size: 14px;
 }
 
+html,
+body {
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+}
+
+.fast {
+	background:url('../img/right.png');
+	animation-duration: 0.3s;
+}
+
 .fade-enter-active,
 .fade-leave-active {
 	transition: opacity .5s
