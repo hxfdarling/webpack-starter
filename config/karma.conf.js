@@ -4,15 +4,15 @@ module.exports = function(config) {
 	var _config = {
 		basePath: '',
 		browsers: ['PhantomJS'], //Chrome,PhantomJS
-		coverageReporter: {
-			reporters: [{
-				type: 'html',
-				subdir: 'html'
-			}, {
-				type: 'lcovonly',
-				subdir: '.'
-			}, ],
-		},
+		// coverageReporter: {
+		// 	reporters: [{
+		// 		type: 'html',
+		// 		subdir: 'html'
+		// 	}, {
+		// 		type: 'lcovonly',
+		// 		subdir: '.'
+		// 	}, ],
+		// },
 		frameworks: ['jasmine'],
 
 		files: [

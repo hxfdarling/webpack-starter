@@ -7,6 +7,9 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var MoveToParentMergingPlugin = require('move-to-parent-merging-webpack-plugin');
 var AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 var path = require('path');
+var os = require('os');
+var HappyPack = require('happypack');
+var happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 var config = {
 	entry: {
 		//polyfill es5,es6......
@@ -51,7 +54,7 @@ var config = {
 				}
 			},
 			{
-				loader: 'babel',
+				loader: 'happypack/loader', //'babel',
 				test: /\.js$/,
 				exclude: [
 					/node_modules/,
@@ -67,7 +70,7 @@ var config = {
 				loaders: [
 					'file?name=assets/[name].[hash].[ext]',
 					// 'url-loader?limit=8192',
-					'image-webpack'
+					// 'image-webpack'
 				]
 			},
 			{
@@ -101,6 +104,11 @@ var config = {
 		}
 	},
 	plugins: [
+		new HappyPack({
+			// loaders is the only required parameter:
+			loaders: ['babel?presets[]=es2015&plugins[]=transform-runtime']
+				// customize as needed, see Configuration below
+		}),
 		// 自动抽离异步加载的脚本引用到的资源到公共模块，第一次加载出来,可以设置参数，几个相同模块才会处理
 		new MoveToParentMergingPlugin(),
 
