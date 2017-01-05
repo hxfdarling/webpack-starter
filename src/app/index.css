@@ -16,6 +16,17 @@
 	padding: 50px 0 20px 20px;
 }
 
+.x-menu li {
+	cursor: pointer;
+	border: 1px solid transparent;
+	transition: all ease-in-out .3s;
+}
+
+.x-menu li.active {
+	border: 1px solid #ddd;
+	background:#ddd
+}
+
 .x-main {
 	position: absolute;
 	top: 0;
@@ -32,4 +43,8 @@
 .content {
 	position: absolute;
 	background: #fff;
+}
+
+.x-hide {
+	opacity: 0;
 }

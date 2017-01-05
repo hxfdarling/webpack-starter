@@ -5,6 +5,7 @@ var helpers = require('./helpers');
 var AssetsPlugin = require('assets-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var MoveToParentMergingPlugin = require('move-to-parent-merging-webpack-plugin');
+var AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 var path = require('path');
 var config = {
 	entry: {
@@ -24,7 +25,7 @@ var config = {
 		modules: [helpers.root('src'), 'node_modules'],
 		alias: {
 			//开启vue的standalone
-			vue: 'vue/dist/vue.js',
+			vue: 'vue/dist/vue.js'
 		}
 	},
 
@@ -122,6 +123,7 @@ var config = {
 		new HtmlWebpackPlugin({
 			filename: "index.html",
 			template: 'src/index.html',
+			inject: true,
 			chunksSortMode: "dependency"
 		})
 	]
@@ -157,10 +159,26 @@ module.exports = function(options) {
 	var ProvidePlugin = new webpack.ProvidePlugin({
 		"Vue": "vue",
 		"Vuex": "vuex",
-		"VueRouter": "vue-router",
-		"$": "jquery",
-		"jQuery": "jquery"
+		"VueRouter": "vue-router"
 	});
-	config.plugins.push(ProvidePlugin);
+	var dll = {
+		manifest: require(options === 'dev' ?
+			'../common/debug/manifest.json' :
+			'../common/dist/manifest.json'),
+		filepath: path.resolve(__dirname, options === 'dev' ?
+			"../common/debug/lib.js" :
+			"../common/dist/lib.js")
+	}
+	config.plugins.push(
+		ProvidePlugin,
+		new webpack.DllReferencePlugin({
+			context: __dirname,
+			manifest: dll.manifest
+		}),
+		new AddAssetHtmlPlugin([{
+			filepath: dll.filepath,
+			includeSourcemap: options === 'dev'
+		}])
+	);
 	return config;
 }

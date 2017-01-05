@@ -3,3 +3,4 @@ dist/
 .history/
 .idea/
 coverage/
+common/

@@ -1,16 +1,17 @@
 <div>
 	<div class="x-menu">
-		<input-x v-on:input="inputXChange" v-bind:input="value"  v-bind:label="test"></input-x>
-		<input v-model="value" />
+		<h1>Menu</h1>
 		<ul>
-			<li v-for="item in routes" v-if="item.text">
-				<router-link :to="item.path">{{item.text}}</router-link>
-			</li>
+			<router-link tag="li" v-for="item in routes" v-if="item.text" active-class="active" :to="item.path">
+				{{item.text}}
+			</router-link>
 		</ul>
 	</div>
 	<div class="x-main">
-		<transition enter-active-class="animated rollIn fast" leave-active-class="animated rollOut fast">
-			<router-view class="content"></router-view>
+		<transition enter-class="x-hide" enter-active-class="animated fadeInLeft fast" leave-active-class="animated fadeOutRight fast">
+			<keep-alive>
+				<router-view class="content"></router-view>
+			</keep-alive>
 		</transition>
 	</div>
 </div>
