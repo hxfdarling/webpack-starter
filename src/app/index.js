@@ -5,6 +5,7 @@ import Vuex from "vuex"
 import { routes } from "./router.config.js"
 import XButton from './components/x-button.vue'
 import html from './index.html'
+import toolbar from './components/toolbar'
 Vue.use(VueRouter);
 Vue.use(Vuex);
 if (process.env.ENV === 'dev') {
@@ -84,12 +85,18 @@ Vue.use({
 			}
 		})
 	}
-})
+});
+var win;
+if (nw) {
+	win = nw.Window.get();
+}
 let app = new Vue({
 	router,
 	store,
 	data: function() {
 		return {
+			text: "",
+			state: 'normal',
 			test: 'test',
 			cls: "test",
 			value: "test",
@@ -102,9 +109,19 @@ let app = new Vue({
 			return this.$store.state.count;
 		}
 	},
-	components: { "input-x": InputComponent, XButton },
+	components: {
+		"input-x": InputComponent,
+		XButton,
+		toolbar
+	},
 	methods: {
-		change: function(event) {
+		getText(text) {
+			this.text = text;
+		},
+		windowChange(action) {
+			console.log(action);
+		},
+		change(event) {
 			this.$data.test = 1;
 			if (this.changeTime) {
 				clearTimeout(this.changeTime);
@@ -114,7 +131,7 @@ let app = new Vue({
 				console.log(this.value);
 			}.bind(this), 500);
 		},
-		inputXChange: function(value) {
+		inputXChange(value) {
 			this.value = value;
 		}
 	},
