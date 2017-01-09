@@ -5,7 +5,7 @@ import Vuex from "vuex"
 import { routes } from "./router.config.js"
 import XButton from './components/x-button.vue'
 import html from './index.html'
-import toolbar from './components/toolbar'
+import titlebar from './components/titlebar'
 Vue.use(VueRouter);
 Vue.use(Vuex);
 if (process.env.ENV === 'dev') {
@@ -112,7 +112,7 @@ let app = new Vue({
 	components: {
 		"input-x": InputComponent,
 		XButton,
-		toolbar
+		titlebar
 	},
 	methods: {
 		getText(text) {
