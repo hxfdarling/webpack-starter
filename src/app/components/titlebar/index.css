@@ -5,7 +5,6 @@
 	position: absolute;
 	left: 0;
 	top: 0;
-	right:0;
 	user-select: none;
 	-webkit-user-drag: none;
 }
@@ -127,11 +126,11 @@
 
 .titlebar.windows {
 	right: 0;
-	left: 0;
+	left: auto;
 	padding: 0;
 }
 
-.windows .titlebar-stoplight {
+.titlebar.windows .titlebar-stoplight {
 	float: right;
 	text-align: left;
 }
@@ -145,9 +144,9 @@
 	left: 0;
 }
 
-.windows .titlebar-close,
-.windows .titlebar-minimize,
-.windows .titlebar-maximize {
+.titlebar.windows .titlebar-close,
+.titlebar.windows .titlebar-minimize,
+.titlebar.windows .titlebar-maximize {
 	float: left;
 	width: 46px;
 	height: 28px;
@@ -160,41 +159,41 @@
 	transition: background ease-in-out .1s;
 }
 
-.windows .titlebar-close:hover,
-.windows .titlebar-minimize:hover,
-.windows .titlebar-maximize:hover {
+.titlebar.windows .titlebar-close:hover,
+.titlebar.windows .titlebar-minimize:hover,
+.titlebar.windows .titlebar-maximize:hover {
 	background: #E5E5E5;
 }
 
-.windows .titlebar-close:active,
-.windows .titlebar-minimize:active,
-.windows .titlebar-maximize:active {
+.titlebar.windows .titlebar-close:active,
+.titlebar.windows .titlebar-minimize:active,
+.titlebar.windows .titlebar-maximize:active {
 	opacity: .8;
 }
 
-.windows .titlebar-close:hover {
+.titlebar.windows .titlebar-close:hover {
 	background: #E81123;
 }
 
-.windows .titlebar-close:hover polyline {
+.titlebar.windows .titlebar-close:hover polyline {
 	stroke: #fff !important;
 }
 
-.windows .titlebar-close svg {
+.titlebar.windows .titlebar-close svg {
 	width: 10px;
 	height: 10px;
 	opacity: 1;
 }
 
-.windows .titlebar-minimize svg {
+.titlebar.windows .titlebar-minimize svg {
 	width: 10px;
 	height: 1px;
 	margin: 0;
 	opacity: 1;
 }
 
-.windows .titlebar-maximize svg {
-	width: 12px;
-	height: 12px;
+.titlebar.windows .titlebar-maximize svg {
+	width: 10px;
+	height: 10px;
 	opacity: 1;
 }

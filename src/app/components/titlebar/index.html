@@ -2,17 +2,17 @@
 	<div class="titlebar-stoplight">
 		<!--mac-->
 		<template v-if="isMac">
-			<div class="titlebar-close" @click="close">
+			<div v-if="!hideClose" class="titlebar-close" @click="close">
 				<svg x="0px" y="0px" viewBox="0 0 6.4 6.4">
 					<polygon fill="#4d0000" points="6.4,0.8 5.6,0 3.2,2.4 0.8,0 0,0.8 2.4,3.2 0,5.6 0.8,6.4 3.2,4 5.6,6.4 6.4,5.6 4,3.2"></polygon>
 				</svg>
 			</div>
-			<div class="titlebar-minimize" @click="min">
+			<div v-if="!hideMin" class="titlebar-minimize" @click="min">
 				<svg x="0px" y="0px" viewBox="0 0 8 1.1">
 					<rect fill="#995700" width="8" height="1.1"></rect>
 				</svg>
 			</div>
-			<div class="titlebar-fullscreen" @click="max">
+			<div v-if="!hideMax" class="titlebar-fullscreen" @click="max">
 				<svg v-if="!alt&&!isFull&&!isMaxSize" class="fullscreen-svg" x="0px" y="0px" viewBox="0 0 6 5.9">
 					<path fill="#006400" d="M5.4,0h-4L6,4.5V0.6C5.7,0.6,5.3,0.3,5.4,0z"></path>
 					<path fill="#006400" d="M0.6,5.9h4L0,1.4l0,3.9C0.3,5.3,0.6,5.6,0.6,5.9z"></path>
@@ -29,24 +29,31 @@
 		</template>
 		<!--windows-->
 		<template v-else>
-			<div class="titlebar-minimize" @click="min">
+			<div v-if="!hideMin" class="titlebar-minimize" @click="min">
 				<svg x="0px" y="0px" viewBox="0 0 10 1">
 					<rect fill="#999999" width="10" height="1"></rect>
 				</svg>
 			</div>
-			<div class="titlebar-maximize" @click="max">
-				<svg v-if="!isMaxSize" class="max" viewBox="0 0 12 12">
-					<rect width="9" height="9" x="1" y="1"
-						style="fill:transparent;stroke-width:1;stroke:#999999"/>
+			<div v-if="!hideMax" class="titlebar-maximize" @click="max">
+				<svg v-if="!isMaxSize" class="max" viewBox="0 0 10 10">
+ 					<rect fill="#999999" width="10" height="1"></rect>
+ 					<rect fill="#999999" width="1" height="10"></rect>
+ 					<rect fill="#999999" x="9" width="1" height="10"></rect>
+ 					<rect fill="#999999" y="9" width="10" height="1"></rect>
 				</svg>
-				<svg v-else class="restore" viewBox="0 0 12 12">
-					<polyline points="3,3 3,1 9,1 9,3 9,7 7,7" 
-						style="fill:transparent;stroke:#999999;stroke-width:1" />
-					<rect width="6" height="6" x="1" y="3"
-						style="fill:transparent;stroke-width:1;stroke:#999999"/>
+				<svg v-else class="restore" viewBox="0 0 10 10">
+					<rect fill="#999999" y="2" width="8" height="1"></rect>
+ 					<rect fill="#999999" y="2" width="1" height="8"></rect>
+ 					<rect fill="#999999" x="7" y="2" width="1" height="8"></rect>
+ 					<rect fill="#999999" y="9" width="8" height="1"></rect>
+					
+					<rect fill="#999999" x="2" width="8" height="1"></rect>
+					<rect fill="#999999" x="2" width="1" height="2"></rect>
+					<rect fill="#999999" x="9" width="1" height="8"></rect>
+					<rect fill="#999999" y="7" x="8" width="2" height="1"></rect>
 				</svg>
 			</div>
-			<div class="titlebar-close" @click="close">
+			<div v-if="!hideClose" class="titlebar-close" @click="close">
 				<svg  x="0px" y="0px" viewBox="0 0 10 10">
 					<polyline points="0,0 10,10 5,5 0,10 10,0" 
 						style="fill:transparent;stroke:#999999;stroke-width:1"/>

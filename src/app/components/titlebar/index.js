@@ -52,6 +52,18 @@ export default {
 		}
 	},
 	props: {
+		hideMax: {
+			default: false,
+			type: Boolean
+		},
+		hideMin: {
+			default: false,
+			type: Boolean
+		},
+		hideClose: {
+			default: false,
+			type: Boolean
+		},
 		type: {
 			default: 'mac',
 			type: String
