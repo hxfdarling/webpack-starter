@@ -179,8 +179,8 @@
 	stroke: #fff !important;
 }
 
-.titlebar.titlebar.windows .titlebar-minimize:hover rect,
-.titlebar.titlebar.windows .titlebar-maximize:hover rect {
+.titlebar.windows .titlebar-minimize:hover rect,
+.titlebar.windows .titlebar-maximize:hover rect {
 	fill: #000 !important;
 }
 
