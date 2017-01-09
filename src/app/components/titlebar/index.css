@@ -179,6 +179,11 @@
 	stroke: #fff !important;
 }
 
+.titlebar.titlebar.windows .titlebar-minimize:hover rect,
+.titlebar.titlebar.windows .titlebar-maximize:hover rect {
+	fill: #000 !important;
+}
+
 .titlebar.windows .titlebar-close svg {
 	width: 10px;
 	height: 10px;
