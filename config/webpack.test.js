@@ -40,6 +40,5 @@ module.exports = webpackMerge(commonConfig, {
 	},
 	babel: {
 		plugins: ['add-module-exports']
-	},
-	plugins: []
+	}
 });

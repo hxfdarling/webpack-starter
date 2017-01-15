@@ -38,7 +38,7 @@ module.exports = function(config) {
 			noInfo: true
 		},
 
-		reporters: ['progress', 'coverage'],
+		reporters: ['progress'], // 'coverage'],
 		// customContextFile: './src/index.html',
 		port: 9876,
 		colors: true,
