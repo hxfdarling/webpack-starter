@@ -2,6 +2,8 @@
 	"presets": ["es2015"],
 	"plugins": [
 		"transform-runtime",
-		"add-module-exports"
+		"add-module-exports",
+		"syntax-async-functions",
+		"transform-regenerator"
 	]
 }

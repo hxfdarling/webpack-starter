@@ -1,4 +1,5 @@
 {
+	"parser": "babel-eslint",
 	"env": {
 		"browser": true,
 		"commonjs": true,
@@ -6,6 +7,7 @@
 		"node": true
 	},
 	"parserOptions": {
+		"generator-star-spacing": 0,
 		"ecmaFeatures": {
 			"jsx": true
 		},

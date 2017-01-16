@@ -4,15 +4,15 @@ module.exports = function(config) {
 	var _config = {
 		basePath: '',
 		browsers: ['PhantomJS'], //Chrome,PhantomJS
-		// coverageReporter: {
-		// 	reporters: [{
-		// 		type: 'html',
-		// 		subdir: 'html'
-		// 	}, {
-		// 		type: 'lcovonly',
-		// 		subdir: '.'
-		// 	}, ],
-		// },
+		coverageReporter: {
+			reporters: [{
+				type: 'html',
+				subdir: 'html'
+			}, {
+				type: 'lcovonly',
+				subdir: '.'
+			}, ],
+		},
 		frameworks: ['jasmine'],
 
 		files: [
@@ -38,7 +38,7 @@ module.exports = function(config) {
 			noInfo: true
 		},
 
-		reporters: ['progress', 'coverage'],
+		reporters: ['progress'],//, 'coverage'],
 		// customContextFile: './src/index.html',
 		port: 9876,
 		colors: true,

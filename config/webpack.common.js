@@ -82,7 +82,7 @@ var config = {
 	},
 	babel: {
 		presets: ['es2015'],
-		plugins: ['transform-runtime']
+		plugins: ['transform-runtime', "syntax-async-functions", "transform-regenerator"]
 	},
 	postcss: [
 		//配置css样式自动更具can i use添加前缀
@@ -104,10 +104,11 @@ var config = {
 		}
 	},
 	plugins: [
-		new HappyPack({
-			// loaders is the only required parameter:
-			loaders: ['babel?presets[]=es2015&plugins[]=transform-runtime']
-				// customize as needed, see Configuration below
+		//根据该配置自动引入web_modules下面的第三方库，省去了手动写require('xxx')		
+		new webpack.ProvidePlugin({
+			"Vue": "vue",
+			"Vuex": "vuex",
+			"VueRouter": "vue-router"
 		}),
 		// 自动抽离异步加载的脚本引用到的资源到公共模块，第一次加载出来,可以设置参数，几个相同模块才会处理
 		new MoveToParentMergingPlugin(),
@@ -163,12 +164,6 @@ module.exports = function(options) {
 			loader: ExtractTextPlugin.extract('style', 'css!postcss') //no support hot module replacement
 		});
 	}
-	//根据该配置自动引入web_modules下面的第三方库，省去了手动写require('xxx')
-	var ProvidePlugin = new webpack.ProvidePlugin({
-		"Vue": "vue",
-		"Vuex": "vuex",
-		"VueRouter": "vue-router"
-	});
 	var dll = {
 		manifest: require(options === 'dev' ?
 			'../common/debug/manifest.json' :
@@ -178,7 +173,11 @@ module.exports = function(options) {
 			"../common/dist/lib.js")
 	}
 	config.plugins.push(
-		ProvidePlugin,
+		new HappyPack({
+			// loaders is the only required parameter:
+			loaders: ['babel?presets[]=es2015&plugins[]=transform-runtime&plugins[]=syntax-async-functions&plugins[]=transform-regenerator']
+				// customize as needed, see Configuration below
+		}),
 		new webpack.DllReferencePlugin({
 			context: __dirname,
 			manifest: dll.manifest

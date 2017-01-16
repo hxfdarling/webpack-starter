@@ -39,7 +39,6 @@ module.exports = webpackMerge(commonConfig, {
 		]
 	},
 	babel: {
-		plugins: ['add-module-exports']
-	},
-	plugins: []
+		plugins: ['add-module-exports', 'transform-runtime', "syntax-async-functions", "transform-regenerator"]
+	}
 });
