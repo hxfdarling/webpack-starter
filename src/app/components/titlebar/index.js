@@ -52,6 +52,10 @@ export default {
 		}
 	},
 	props: {
+		full: {
+			default: false,
+			type: Boolean
+		},
 		hideMax: {
 			default: false,
 			type: Boolean
@@ -89,6 +93,7 @@ export default {
 		},
 		cls() {
 			return {
+				full: this.full,
 				"webkit-draggable": true,
 				alt: this.alt,
 				windows: this.type === 'windows',

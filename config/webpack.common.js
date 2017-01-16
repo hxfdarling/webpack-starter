@@ -173,10 +173,10 @@ module.exports = function(options) {
 			"../common/dist/lib.js")
 	}
 	config.plugins.push(
+		//充分利用多核心加速构建
 		new HappyPack({
 			// loaders is the only required parameter:
 			loaders: ['babel?presets[]=es2015&plugins[]=transform-runtime&plugins[]=syntax-async-functions&plugins[]=transform-regenerator']
-				// customize as needed, see Configuration below
 		}),
 		new webpack.DllReferencePlugin({
 			context: __dirname,

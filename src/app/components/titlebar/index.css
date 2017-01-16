@@ -9,6 +9,10 @@
 	-webkit-user-drag: none;
 }
 
+.titlebar.full {
+	right: 0;
+}
+
 .titlebar.webkit-draggable {
 	-webkit-app-region: drag;
 }
@@ -128,6 +132,10 @@
 	right: 0;
 	left: auto;
 	padding: 0;
+}
+
+.titlebar.full.windows {
+	left: 0;
 }
 
 .titlebar.windows .titlebar-stoplight {

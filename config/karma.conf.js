@@ -37,9 +37,7 @@ module.exports = function(config) {
 		webpackServer: {
 			noInfo: true
 		},
-
-		reporters: ['progress'],//, 'coverage'],
-		// customContextFile: './src/index.html',
+		reporters: ['progress'], //, 'coverage'],
 		port: 9876,
 		colors: true,
 		logLevel: config.LOG_INFO,
