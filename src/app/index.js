@@ -86,10 +86,6 @@ Vue.use({
 		})
 	}
 });
-var win;
-if (nw) {
-	win = nw.Window.get();
-}
 let app = new Vue({
 	router,
 	store,

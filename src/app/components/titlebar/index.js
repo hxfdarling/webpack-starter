@@ -6,7 +6,7 @@ export default {
 	created() {
 		window.addEventListener('keydown', this.keydown);
 		window.addEventListener('keyup', this.keyup);
-		this.win = nw && nw.Window.get();
+		this.win = window.nw && window.nw.Window.get();
 		if (this.win) {
 			var record = []; //fix before minimize ,window is maximize or fullscreen
 			this.win.on('minimize', () => {
