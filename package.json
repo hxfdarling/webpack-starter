@@ -6,11 +6,11 @@
     "start": "webpack-dev-server --inline --progress",
     "test": "karma start",
     "clean": "rimraf dist build",
-    "dev": "npm run clean && webpack --config config/webpack.dev.js --progress --profile --bail",
-    "prod": "npm run clean && webpack --config config/webpack.prod.js  --progress --profile --bail",
+    "dev": "npm run clean && webpack --config config/webpack.dev.js --progress --profile --colors",
+    "prod": "npm run clean && webpack --config config/webpack.prod.js  --progress --profile --colors",
     "dll": "rimraf common && npm run dll:dev && npm run dll:prod",
-    "dll:dev": "webpack --config config/webpack.dll.js --env.development --progress --profile --bail",
-    "dll:prod": "webpack --config config/webpack.dll.js --env.production --progress --profile --bail"
+    "dll:dev": "webpack --config config/webpack.dll.js --env.development --progress --profile --colors",
+    "dll:prod": "webpack --config config/webpack.dll.js --env.production --progress --profile --colors"
   },
   "license": "MIT",
   "dependencies": {

@@ -16,18 +16,28 @@ module.exports = webpackMerge(commonConfig, {
 		chunkFilename: '[id].[chunkhash].chunk.js'
 	},
 	plugins: [
+		new ExtractTextPlugin({ filename: '[name].[chunkhash].css' }),
 		new webpack.NoErrorsPlugin(),
 		new webpack.optimize.DedupePlugin(),
-		new webpack.optimize.UglifyJsPlugin({
-			mangle: {
-				keep_fnames: true
-			}
+		new webpack.LoaderOptionsPlugin({
+			minimize: true,
+			debug: false
 		}),
-		new ExtractTextPlugin({ filename: '[name].[chunkhash].css' }),
 		new webpack.DefinePlugin({
 			'process.env': {
-				'NODE_ENV': JSON.stringify(ENV)
+				'NODE_ENV': JSON.stringify('production')
 			}
+		}),
+		new webpack.optimize.UglifyJsPlugin({
+			beautify: false,
+			mangle: {
+				screw_ie8: true,
+				keep_fnames: true
+			},
+			compress: {
+				screw_ie8: true
+			},
+			comments: false
 		})
 	]
 });
