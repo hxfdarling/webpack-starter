@@ -23,7 +23,8 @@ module.exports = webpackMerge(commonConfig, {
 				'NODE_ENV': JSON.stringify(ENV)
 			}
 		}),
-		new webpack.HotModuleReplacementPlugin()
+		new webpack.HotModuleReplacementPlugin(),
+		new webpack.NamedModulesPlugin()
 	],
 
 	devServer: {

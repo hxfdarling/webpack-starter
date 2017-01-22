@@ -49,7 +49,7 @@ module.exports = function(env) {
 	}
 	return {
 
-		devtool: '#source-map',
+		devtool: 'source-map',
 		entry: {
 			lib: lib
 		},

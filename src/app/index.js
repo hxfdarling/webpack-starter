@@ -8,7 +8,7 @@ import html from './index.html'
 import titlebar from './components/titlebar'
 Vue.use(VueRouter);
 Vue.use(Vuex);
-if (process.env.ENV === 'dev') {
+if (process.env.ENV === 'development') {
 	Vue.config.debug = true;
 }
 var store = new Vuex.Store({
