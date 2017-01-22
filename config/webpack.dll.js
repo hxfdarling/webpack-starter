@@ -9,7 +9,13 @@ module.exports = function(env) {
 		"vuex",
 		"animate.css"
 	];
-	const isDebug = (process.env.NODE_ENV = env) === 'dev';
+	var mode = "development";
+	if (env.production) {
+		mode = "production"
+	}
+	process.env.BUILD_RELEASE = process.env.NODE_ENV = process.env.ENV = mode;
+
+	const isDebug = !env.production;
 	const outputPath = path.join(__dirname, isDebug ? '../common/debug' : '../common/dist');
 	const fileName = '[name].js';
 	const plugin = [
@@ -28,10 +34,9 @@ module.exports = function(env) {
 			name: '[name]',
 			context: __dirname
 		}),
-		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.DefinePlugin({
 			'process.env': {
-				'NODE_ENV': JSON.stringify(env)
+				'NODE_ENV': JSON.stringify(mode)
 			}
 		})
 	];
@@ -39,26 +44,26 @@ module.exports = function(env) {
 		plugin.push(new webpack.optimize.UglifyJsPlugin({
 			mangle: {
 				keep_fnames: true
-			},
-			sourceMap: false
+			}
 		}));
 	}
-	const output = {
-		path: outputPath,
-		filename: fileName,
-		/**
-		 * output.library
-		 * 将会定义为 window.${output.library}
-		 * 在这次的例子中，将会定义为`window.vendor_library`
-		 */
-		library: '[name]',
-		// libraryTarget: 'umd',
-		// umdNamedDefine: true
-	}
 	return {
+
 		devtool: '#source-map',
 		entry: {
 			lib: lib
+		},
+		output: {
+			path: outputPath,
+			filename: fileName,
+			/**
+			 * output.library
+			 * 将会定义为 window.${output.library}
+			 * 在这次的例子中，将会定义为`window.vendor_library`
+			 */
+			library: '[name]',
+			// libraryTarget: 'umd',
+			// umdNamedDefine: true
 		},
 		resolve: {
 			alias: {
@@ -67,16 +72,25 @@ module.exports = function(env) {
 			}
 		},
 		module: {
-			loaders: [{
+			rules: [{
 				test: /\.css$/,
-				loader: 'style!css!postcss' //support hot module replacement
+				use: [
+					"style-loader",
+					"css-loader",
+					{
+						loader: 'postcss-loader',
+						options: {
+							plugins: function() {
+								return [
+									require('precss'),
+									require('autoprefixer')
+								];
+							}
+						}
+					}
+				]
 			}]
 		},
-		postcss: [
-			//配置css样式自动更具can i use添加前缀
-			require('autoprefixer')
-		],
-		output: output,
 		plugins: plugin
 	};
 };

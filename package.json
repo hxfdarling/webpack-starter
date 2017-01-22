@@ -7,10 +7,10 @@
     "test": "karma start",
     "clean": "rimraf dist build",
     "dev": "npm run clean && webpack --config config/webpack.dev.js --progress --profile --bail",
-    "prod": "npm run clean && npm run test && webpack --config config/webpack.prod.js  --progress --profile --bail",
+    "prod": "npm run clean && webpack --config config/webpack.prod.js  --progress --profile --bail",
     "dll": "rimraf common && npm run dll:dev && npm run dll:prod",
-    "dll:dev": "webpack --config config/webpack.dll.dev.js --progress --profile --bail",
-    "dll:prod": "webpack --config config/webpack.dll.prod.js --progress --profile --bail"
+    "dll:dev": "webpack --config config/webpack.dll.js --env.development --progress --profile --bail",
+    "dll:prod": "webpack --config config/webpack.dll.js --env.production --progress --profile --bail"
   },
   "license": "MIT",
   "dependencies": {
@@ -42,7 +42,7 @@
     "copy-webpack-plugin": "^3.0.1",
     "cross-env": "^3.1.4",
     "css-loader": "^0.23.1",
-    "extract-text-webpack-plugin": "^1.0.1",
+    "extract-text-webpack-plugin": "^2.0.0-beta.5",
     "file-loader": "^0.8.5",
     "happypack": "^3.0.2",
     "html-loader": "^0.4.4",
@@ -56,7 +56,7 @@
     "karma-jasmine": "^1.1.0",
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^1.8.1",
+    "karma-webpack": "^2.0.1",
     "loader-utils": "^0.2.16",
     "move-to-parent-merging-webpack-plugin": "0.0.2",
     "null-loader": "^0.1.1",
@@ -69,7 +69,7 @@
     "url-loader": "^0.5.7",
     "vue-loader": "^10.0.2",
     "vue-template-compiler": "^2.1.7",
-    "webpack": "^1.14.0",
+    "webpack": "^2.2.0",
     "webpack-dev-server": "^1.16.2",
     "webpack-merge": "^0.14.1"
   },

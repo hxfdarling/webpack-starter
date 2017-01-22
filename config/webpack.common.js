@@ -11,6 +11,7 @@ var os = require('os');
 var HappyPack = require('happypack');
 var happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 var config = {
+	target: "web",
 	entry: {
 		//polyfill es5,es6......
 		'polyfills': './src/polyfills.js',
@@ -23,10 +24,12 @@ var config = {
 
 	},
 	resolve: {
-		extensions: ['', '.js', '.json', '.vue'],
+		extensions: ['.js', '.json', '.html', '.vue', '.css'],
 		// An array of directory names to be resolved to the current directory
 		modules: [helpers.root('src'), 'node_modules'],
 		alias: {
+			//目录别名
+			components: helpers.root('src/app/components'),
 			//开启vue的standalone
 			vue: 'vue/dist/vue.js'
 		}
@@ -38,70 +41,38 @@ var config = {
 		它针对全解析的请求相匹配。
 		无视大库时，这可以提高性能。
 		*/
-		noParse: [],
-		loaders: [{
+		// noParse: [],
+		rules: [{
 				test: /\.vue$/,
-				loader: 'vue',
-				options: {
-					loaders: {
-						// Since sass (weirdly) has SCSS as its default parse mode, we map
-						// the "scss" and "sass" values for the lang attribute to the right configs here.
-						// other preprocessors should work out of the box, no loader config like this nessessary.
-						'scss': 'vue-style!css!sass',
-						'sass': 'vue-style!css!sass?indentedSyntax'
-					}
-					// other vue options go here
-				}
+				loader: 'vue-loader'
 			},
 			{
-				loader: 'happypack/loader', //'babel',
+				loader: 'babel-loader', //'happypack/loader'
 				test: /\.js$/,
 				exclude: [
 					/node_modules/,
 					path.resolve(helpers.root('src'), './patch')
 				]
 			},
-			{ test: /\.json$/, loader: 'json' },
-			{ test: /\.html$/, loader: 'html' },
+			{
+				test: /\.html$/,
+				loader: 'html-loader'
+			},
 
 			//图片文件使用 url-loader 来处理，小于8kb的直接转为base64
 			{
 				test: /\.(png|jpe?g)$/,
 				loaders: [
-					'file?name=assets/[name].[hash].[ext]',
+					'file-loader?name=assets/[name].[hash].[ext]',
 					// 'url-loader?limit=8192',
 					// 'image-webpack'
 				]
 			},
 			{
 				test: /\.(gif|svg|woff|woff2|ttf|eot|ico)$/,
-				loader: 'file?name=assets/[name].[hash].[ext]'
+				loader: 'file-loader?name=assets/[name].[hash].[ext]'
 			}
-			//css loader lazy config
 		]
-	},
-	babel: {
-		presets: ['es2015'],
-		plugins: ['transform-runtime', "syntax-async-functions", "transform-regenerator"]
-	},
-	postcss: [
-		//配置css样式自动更具can i use添加前缀
-		require('autoprefixer')
-	],
-	imageWebpackLoader: {
-		pngquant: {
-			quality: "65-90",
-			speed: 4
-		},
-		svgo: {
-			plugins: [{
-					removeViewBox: false
-				},
-				{
-					removeEmptyAttrs: false
-				}
-			]
-		}
 	},
 	plugins: [
 		//根据该配置自动引入web_modules下面的第三方库，省去了手动写require('xxx')		
@@ -111,7 +82,7 @@ var config = {
 			"VueRouter": "vue-router"
 		}),
 		// 自动抽离异步加载的脚本引用到的资源到公共模块，第一次加载出来,可以设置参数，几个相同模块才会处理
-		new MoveToParentMergingPlugin(),
+		// new MoveToParentMergingPlugin(),
 
 		new CopyWebpackPlugin([{
 			from: helpers.root('src') + '/public',
@@ -137,54 +108,70 @@ var config = {
 		})
 	]
 };
-module.exports = function(options) {
+module.exports = function(mode) {
+	var postcss = {
+		loader: 'postcss-loader',
+		options: {
+			plugins: function() {
+				return [
+					require('precss'),
+					require('autoprefixer')
+				];
+			}
+		}
+	}
+	switch (mode) {
+		case "development":
+			config.module.rules.push({
+				test: /\.css$/,
+				use: [ //support hot module replacement
+						"style-loader",
+						"css-loader",
+						postcss
+					]
+					//用于分离css与js代码，默认使用moules后会将css代码打包到js中
+					//[hash:base64:5]_[path][name]_[local]
+					// exclude: helpers.root('src', 'assests'),
+					//	loader: 'style!css!postcss' //support hot module replacement
+					//loader: ExtractTextPlugin.extract('style', 'css!postcss') //no support hot module replacement
+					// loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[hash:base64:5]_[path][name]_[local]!postcss')
+			});
+			break;
+		case "production":
+			config.module.rules.push({
+				test: /\.css$/,
+				loader: ExtractTextPlugin.extract({
+						fallbackLoader: "style-loader",
+						loader: [
+							"css-loader",
+							postcss
+						]
+					}) //no support hot module replacement
+			});
+			break;
+		case "test":
+			config.module.rules.push({
+				test: /\.css$/,
+				use: [
+					"style-loader",
+					"css-loader"
+				]
+			});
+			break;
+	}
 
-	if (options == "test") {
-		config.plugins = [];
-		config.entry = {};
-		config.module.loaders.push({
-			test: /\.css$/,
-			loader: 'style!css!postcss' //support hot module replacement
-		});
-	}
-	if (options == "dev") {
-		config.module.loaders.push({
-			test: /\.css$/,
-			//用于分离css与js代码，默认使用moules后会将css代码打包到js中
-			//[hash:base64:5]_[path][name]_[local]
-			// exclude: helpers.root('src', 'assests'),
-			loader: 'style!css!postcss' //support hot module replacement
-				//loader: ExtractTextPlugin.extract('style', 'css!postcss') //no support hot module replacement
-				// loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[hash:base64:5]_[path][name]_[local]!postcss')
-		});
-	}
-	if (options == "producation") {
-		config.module.loaders.push({
-			test: /\.css$/,
-			loader: ExtractTextPlugin.extract('style', 'css!postcss') //no support hot module replacement
-		});
-	}
 	var dll = {
-		manifest: require(options === 'dev' ?
-			'../common/debug/manifest.json' :
-			'../common/dist/manifest.json'),
-		filepath: path.resolve(__dirname, options === 'dev' ?
-			"../common/debug/lib.js" :
-			"../common/dist/lib.js")
+		manifest: require(mode === 'development' ? '../common/debug/manifest.json' : '../common/dist/manifest.json'),
+		filepath: path.resolve(__dirname, mode === 'development' ? "../common/debug/lib.js" : "../common/dist/lib.js")
 	}
 	config.plugins.push(
-		//充分利用多核心加速构建
-		new HappyPack({
-			// loaders is the only required parameter:
-			loaders: ['babel?presets[]=es2015&plugins[]=transform-runtime&plugins[]=syntax-async-functions&plugins[]=transform-regenerator']
-		}),
 		new webpack.DllReferencePlugin({
 			context: __dirname,
 			manifest: dll.manifest
 		}),
 		new AddAssetHtmlPlugin([{
 			filepath: dll.filepath,
-			includeSourcemap: options === 'dev'
+			includeSourcemap: mode === 'development'
 		}])
 	);
 	return config;

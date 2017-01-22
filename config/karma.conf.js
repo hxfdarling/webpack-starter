@@ -20,7 +20,7 @@ module.exports = function(config) {
 			'./node_modules/babel-polyfill/dist/polyfill.js',
 			{
 				pattern: './config/karma-test-shim.js',
-				watched: false
+				watched: true
 			}
 		],
 
@@ -37,12 +37,12 @@ module.exports = function(config) {
 		webpackServer: {
 			noInfo: true
 		},
-		reporters: ['progress'], //, 'coverage'],
+		reporters: ['progress', 'coverage'],
 		port: 9876,
 		colors: true,
 		logLevel: config.LOG_INFO,
-		autoWatch: false,
-		singleRun: true
+		autoWatch: true,
+		// singleRun: true
 	};
 
 	config.set(_config);
