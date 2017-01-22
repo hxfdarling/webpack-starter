@@ -2,6 +2,7 @@
 	"presets": ["es2015"],
 	"plugins": [
 		"transform-runtime",
+		"syntax-dynamic-import",
 		"syntax-async-functions",
 		"transform-regenerator"
 	]

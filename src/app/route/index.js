@@ -1,4 +1,4 @@
-import './app.css';
+import './index.css';
 import data from '../components/data.js';
 export default Vue.extend({
 	created: function() {

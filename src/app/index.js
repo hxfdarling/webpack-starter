@@ -2,7 +2,7 @@ import './index.css'
 import Vue from 'vue'
 import VueRouter from "vue-router"
 import Vuex from "vuex"
-import { routes } from "./router.config.js"
+import { routes } from "./routes.js"
 import XButton from './components/x-button.vue'
 import html from './index.html'
 import titlebar from './components/titlebar'

@@ -1,19 +1,27 @@
-export const index =resolve=>{
-    require.ensure([],()=>{
-        resolve(require("./pages/app.js").default);
-    });
-};
-export const hello = resolve => {
-    // require.ensure 是 Webpack 的特殊语法，用来设置 code-split point
-    // （代码分块）
-    require.ensure([], () => {
-        resolve(require('./pages/hello.js').default);
-    });
-};
-export const list = resolve => {
-    // require.ensure 是 Webpack 的特殊语法，用来设置 code-split point
-    // （代码分块）
-    require.ensure([], () => {
-        resolve(require('./pages/list.vue'));
-    });
-};
+ const route = (name) => {
+ 	return callback => { import (`./route/${name}`).then(route => { callback(route.default || route) }) }
+ };
+
+ export const routes = [{
+ 		"path": "/",
+ 		"redirect": "/index"
+ 	},
+ 	{
+ 		"path": "/index",
+ 		"name": "index",
+ 		"text": "index page",
+ 		"component": route("index")
+ 	},
+ 	{
+ 		"path": "/hello",
+ 		"name": "hello",
+ 		"text": "hello page",
+ 		"component": route("hello")
+ 	},
+ 	{
+ 		"path": "/list",
+ 		"name": "list",
+ 		"text": "list page",
+ 		"component": route("list")
+ 	}
+ ];
