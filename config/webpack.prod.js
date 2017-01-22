@@ -18,14 +18,13 @@ module.exports = webpackMerge(commonConfig, {
 	plugins: [
 		new ExtractTextPlugin({ filename: '[name].[chunkhash].css' }),
 		new webpack.NoErrorsPlugin(),
-		new webpack.optimize.DedupePlugin(),
 		new webpack.LoaderOptionsPlugin({
 			minimize: true,
 			debug: false
 		}),
 		new webpack.DefinePlugin({
 			'process.env': {
-				'NODE_ENV': JSON.stringify('production')
+				'NODE_ENV': JSON.stringify(ENV)
 			}
 		}),
 		new webpack.optimize.UglifyJsPlugin({
