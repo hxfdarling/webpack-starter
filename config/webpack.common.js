@@ -109,17 +109,6 @@ var config = {
 	]
 };
 module.exports = function(mode) {
-	var postcss = {
-		loader: 'postcss-loader',
-		options: {
-			plugins: function() {
-				return [
-					require('precss'),
-					require('autoprefixer')
-				];
-			}
-		}
-	}
 	switch (mode) {
 		case "development":
 			config.module.rules.push({
@@ -127,7 +116,7 @@ module.exports = function(mode) {
 				use: [ //support hot module replacement
 						"style-loader",
 						"css-loader",
-						postcss
+						"postcss-loader"
 					]
 					//用于分离css与js代码，默认使用moules后会将css代码打包到js中
 					//[hash:base64:5]_[path][name]_[local]
@@ -144,7 +133,7 @@ module.exports = function(mode) {
 						fallbackLoader: "style-loader",
 						loader: [
 							"css-loader",
-							postcss
+							"postcss-loader"
 						]
 					}) //no support hot module replacement
 			});

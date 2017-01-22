@@ -4,7 +4,7 @@ import xButton from '../components/x-button.vue'
 if (module.hot) {
 	module.hot.accept();
 }
-console.log('sadf');
+console.log('test');
 export default {
 	components: { xButton },
 	template: `
