@@ -38,7 +38,7 @@ module.exports = webpackMerge(commonConfig, {
 		proxy: {
 			"/server/**": {
 				target: "http://localhost:8080",
-				secret: false
+				secure: false
 			}
 		}
 	}
