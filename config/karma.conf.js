@@ -6,18 +6,22 @@ module.exports = function(config) {
 		browsers: ['PhantomJS'], //Chrome,PhantomJS
 		coverageReporter: {
 			reporters: [{
-				type: 'html',
-				subdir: 'html'
-			}, {
-				type: 'lcovonly',
-				subdir: '.'
-			}, ],
+					type: 'lcov',
+					dir: 'coverage',
+					subdir: '.'
+				},
+				{
+					type: 'text-summary',
+					dir: 'coverage',
+					subdir: '.'
+				}
+			]
 		},
 		frameworks: ['jasmine'],
 
 		files: [
 			//for vuex 
-			'./node_modules/babel-polyfill/dist/polyfill.js',
+			// './node_modules/babel-polyfill/dist/polyfill.js',
 			{
 				pattern: './config/karma-test-shim.js',
 				watched: true
@@ -25,7 +29,7 @@ module.exports = function(config) {
 		],
 
 		preprocessors: {
-			'./config/karma-test-shim.js': ['coverage', 'webpack', 'sourcemap']
+			'./config/karma-test-shim.js': ['webpack', 'sourcemap']
 		},
 
 		webpack: webpackConfig,
@@ -37,12 +41,19 @@ module.exports = function(config) {
 		webpackServer: {
 			noInfo: true
 		},
+		plugins: [
+			'karma-jasmine',
+			'karma-sourcemap-loader',
+			'karma-webpack',
+			'karma-coverage',
+			'karma-phantomjs-launcher'
+		],
 		reporters: ['progress', 'coverage'],
 		port: 9876,
 		colors: true,
 		logLevel: config.LOG_INFO,
-		autoWatch: true,
-		// singleRun: true
+		// autoWatch: true
+		singleRun: true
 	};
 
 	config.set(_config);

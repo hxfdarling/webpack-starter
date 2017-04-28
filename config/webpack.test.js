@@ -1,5 +1,5 @@
-var commonConfig = require('./webpack.common.js')('test');
-commonConfig.module.rules.push({
+var config = require('./webpack.common.js')('test');
+config.module.rules.push({
 	test: /\.spec\.js$/,
 	include: /test/,
 	enforce: "pre",
@@ -9,6 +9,18 @@ commonConfig.module.rules.push({
 		cacheDirectory: true,
 	}
 });
+// add babel-plugin-istanbul for code intrumentation
+config.module.rules[1].options = {
+	plugins: [
+		['istanbul', {
+			exclude: [
+				'test/',
+				'config/'
+			]
+		}]
+	]
+}
 module.exports = {
-	module: commonConfig.module
+	devtool: 'inline-source-map',
+	module: config.module
 }
