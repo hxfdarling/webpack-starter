@@ -1,10 +1,12 @@
 # webpack-starter
+
 This repo help you to quickly build a webpack project
 
 ## Quick start
 
 Clone/Download the repo then edit index.js
-```
+
+```shell
 # clone our repo
 # --depth 1 removes all but one .git commit history
 

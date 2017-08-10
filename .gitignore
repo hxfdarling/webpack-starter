@@ -1,8 +1,5 @@
 node_modules/
+cache/
 dist/
-.history/
-.idea/
-coverage/
-common/
 .happypack/
-debug.log
+coverage/
