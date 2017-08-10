@@ -27,6 +27,7 @@ module.exports = {
     modules: ['node_modules'],
     extensions: ['.js', '.vue', '.json', '.html'],
     alias: {
+      // 'vue': 'vue/dist/vue.js',
       'vue': 'vue/dist/vue.esm.js',
       // 'vue-router': "vue-router/dist/vue-router.esm.js",
       // 'vuex': "vuex/dist/vuex.esm.js",

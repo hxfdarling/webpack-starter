@@ -1,13 +1,9 @@
 import './index.css'
-import Vue from 'vue'
-import VueRouter from "vue-router"
-import Vuex from "vuex"
 import { routes } from "./routes.js"
 import XButton from './components/x-button.vue'
 import html from './index.html'
 import titlebar from './components/titlebar'
-Vue.use(VueRouter)
-Vue.use(Vuex)
+
 if (process.env.ENV === 'development') {
   Vue.config.debug = true;
 }
@@ -87,6 +83,7 @@ Vue.use({
   }
 });
 let app = new Vue({
+  el: "#app",
   router,
   store,
   data: function () {
@@ -138,4 +135,4 @@ let app = new Vue({
     }
   },
   template: html
-}).$mount('#app');
+})
