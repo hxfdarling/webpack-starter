@@ -22,7 +22,7 @@ npm install
 npm start
 
 # bulid release
-npm run bulid:prod
+npm run bulid
 ```
 
 go to  http://localhost in your browser
