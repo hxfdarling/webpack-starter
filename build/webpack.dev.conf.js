@@ -63,13 +63,13 @@ module.exports = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/index.html',
-      inject: true
-      // chunksSortMode: function (chunk1, chunk2) {
-      //   var order = ['vendor', 'base', 'index'];
-      //   var order1 = order.indexOf(chunk1.names[0]);
-      //   var order2 = order.indexOf(chunk2.names[0]);
-      //   return order1 - order2;
-      // }
+      inject: true,
+      chunksSortMode: function (chunk1, chunk2) {
+        var order = ['polyfills', 'vendor', 'index'];
+        var order1 = order.indexOf(chunk1.names[0]);
+        var order2 = order.indexOf(chunk2.names[0]);
+        return order1 - order2;
+      }
     }),
     new webpack.NamedModulesPlugin(),
     new FriendlyErrorsPlugin()
@@ -79,7 +79,7 @@ module.exports = merge(baseWebpackConfig, {
     inline: true,
     hot: true,
     host: '200.200.106.133',
-    port: 80,
+    port: 81,
     compress: true,
     contentBase: '.',
     historyApiFallback: false,

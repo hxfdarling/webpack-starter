@@ -2,7 +2,7 @@
 	<titlebar type="windows" full v-bind:initState="state" @changeState="windowChange"></titlebar>
 	<div class="x-menu">
 		<h1>Menu</h1>
-		<ul>
+		 <ul>
 			<router-link tag="li" v-for="item in routes" v-if="item.text" active-class="active" :to="item.path">
 				{{item.text}}
 			</router-link>

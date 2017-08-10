@@ -57,12 +57,12 @@ let plugins = [
       // https://github.com/kangax/html-minifier#options-quick-reference
     },
     // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-    // chunksSortMode: function (chunk1, chunk2) {
-    //   var order = ['manifest', 'vendor', 'base', 'index'];
-    //   var order1 = order.indexOf(chunk1.names[0]);
-    //   var order2 = order.indexOf(chunk2.names[0]);
-    //   return order1 - order2;
-    // }
+    chunksSortMode: function (chunk1, chunk2) {
+      var order = ['manifest', 'polyfills', 'vendor', 'index'];
+      var order1 = order.indexOf(chunk1.names[0]);
+      var order2 = order.indexOf(chunk2.names[0]);
+      return order1 - order2;
+    }
   }),
   // new ScriptExtHtmlWebpackPlugin({
   //   inline: ["manifest"]

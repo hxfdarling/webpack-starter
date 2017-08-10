@@ -11,7 +11,9 @@ if (require("os").type() === "Linux") {
 module.exports = {
   target: "web",
   entry: {
-    'index': './src/main.js'
+    'index': './src/index.js',
+    'polyfills': './src/polyfills.js',
+    'vendor': './src/vendor.js'
   },
 
   output: {
@@ -26,6 +28,8 @@ module.exports = {
     extensions: ['.js', '.vue', '.json', '.html'],
     alias: {
       'vue': 'vue/dist/vue.esm.js',
+      // 'vue-router': "vue-router/dist/vue-router.esm.js",
+      // 'vuex': "vuex/dist/vuex.esm.js",
       '@': resolve('src'), //映射根目录
     }
   },
