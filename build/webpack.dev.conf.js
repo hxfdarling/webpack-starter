@@ -4,11 +4,14 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const resolve = require('./util.js').resolve
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const serverTarget = 'http://localhost:8083'
 const env = process.env.NODE_ENV = "development"
-
-var devParams = {
+const port = 8081
+const host = 'localhost'
+const open = require('open')
+open('http://'+host+':'+port)
+//set you token
+const devParams = {
   session: "ucvbg7ab9i0ag0a96jva2cluc3"
 }
 module.exports = merge(baseWebpackConfig, {
@@ -78,8 +81,8 @@ module.exports = merge(baseWebpackConfig, {
   devServer: {
     inline: true,
     hot: true,
-    host: '0.0.0.0',
-    port: 80,
+    host: host,
+    port: port,
     compress: true,
     contentBase: '.',
     historyApiFallback: false,
@@ -130,19 +133,8 @@ module.exports = merge(baseWebpackConfig, {
         cookieDomainRewrite: false,
         target: serverTarget,
         secure: false
-      },
-      "/m/php/": {
-        target: serverTarget,
-        secure: false
-      },
-      "/newim": {
-        target: serverTarget,
-        secure: false
-      },
-      "/newim*": {
-        target: serverTarget,
-        secure: false
       }
     }
   }
 })
+
