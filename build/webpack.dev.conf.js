@@ -4,11 +4,13 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const resolve = require('./util.js').resolve
+const ip  = require('ip')
 const serverTarget = 'http://localhost:8083'
 const env = process.env.NODE_ENV = "development"
 const port = 8081
-const host = 'localhost'
+const host ='0.0.0.0' //ip.address()
 const open = require('open')
+//auto open you url in you default browser
 open('http://'+host+':'+port)
 //set you token
 const devParams = {
