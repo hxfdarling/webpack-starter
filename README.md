@@ -1,4 +1,4 @@
-# webpack-starter
+# webpack-example
 
 This repo help you to quickly build a webpack project
 
