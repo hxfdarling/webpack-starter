@@ -1,4 +1,4 @@
-# webpack-example
+# webpack-starter
 
 This repo help you to quickly build a webpack project
 
@@ -10,7 +10,7 @@ Clone/Download the repo then edit index.js
 # clone our repo
 # --depth 1 removes all but one .git commit history
 
-git clone  https://github.com/hxfdarling/webpack-example.git
+git clone  https://github.com/hxfdarling/webpack-starter.git
 
 # change directory to our repo
 cd webpack-starter
